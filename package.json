@@ -1,0 +1,12 @@
+{
+  "name": "emove-profe",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 build.py",
+    "dev": "python3 build.py && node tools/dev.mjs"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.3"
+  }
+}

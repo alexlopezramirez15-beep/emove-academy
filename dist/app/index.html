@@ -1,0 +1,1377 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EMOVE Profe</title>
+<meta name="description" content="Free Erasmus+ training and classroom resources for European teachers, by eMove Academy.">
+<meta name="theme-color" content="#101C38"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="EMOVE Profe"><link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>/* ============ EMOVE Profe · visual system (eMove brand: EU blue, navy, yellow, cream; Inter) ============ */
+:root {
+  --navy: #101C38; --navy-2: #071A32; --blue: #1965B8; --blue-d: #1458A3; --blue-l: #E8F0FA; --yellow: #FFCA05; --yellow-l: #FFF6D1;
+  --cream: #F6F3EE; --card: #FFFFFF; --ink: #101C38; --muted: #526078; --line: #DCE2E9; --line-2: #EEF2F5;
+  --ok: #15803D; --ok-l: #E7F6EC; --bad: #B42318; --bad-l: #FDECEA;
+  --r: 16px; --r-s: 10px; --shadow: 0 1px 2px rgba(16, 28, 56, .06), 0 8px 24px rgba(16, 28, 56, .06);
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--cream); font-size: 16px; line-height: 1.55; }
+a { color: var(--blue); }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .4em; letter-spacing: -.01em; }
+h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; }
+h2 { font-size: 21px; font-weight: 750; }
+h3 { font-size: 18px; font-weight: 700; }
+p { margin: 0 0 .8em; }
+.ic { width: 20px; height: 20px; flex: none; vertical-align: -4px; }
+.ic.big { width: 40px; height: 40px; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+.center { text-align: center; justify-content: center; }
+.grow { flex: 1; min-width: 0; }
+.row { display: flex; align-items: center; flex-wrap: wrap; }
+.gap { gap: 10px; }
+.hp { position: absolute; left: -9999px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.eyebrow .ic { width: 16px; height: 16px; }
+.optional { font-weight: 400; color: var(--muted); font-size: 13px; }
+
+/* ---------- logo, header, nav ---------- */
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); }
+.logo-t { font-size: 19px; letter-spacing: .01em; color: var(--navy); }
+.logo-t b { font-weight: 800; color: var(--blue); }
+.brand { text-decoration: none; }
+.top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 24px; padding: 10px max(16px, calc((100vw - 1160px) / 2)); background: rgba(246, 243, 238, .92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav { display: flex; gap: 4px; margin-left: auto; }
+.nav a { position: relative; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 999px; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 15px; }
+.nav a:hover { background: var(--line-2); color: var(--navy); }
+.nav a.on { background: var(--navy); color: #fff; }
+.nav em { font-style: normal; background: var(--yellow); color: var(--navy); font-size: 11px; font-weight: 800; border-radius: 999px; padding: 0 6px; }
+.nav em:empty { display: none; }
+.view { max-width: 1160px; margin: 0 auto; padding: 28px 16px 64px; }
+.foot { max-width: 1160px; margin: 0 auto; padding: 24px 16px 96px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+@media (max-width: 860px) {
+  .top { padding: 10px 16px; }
+  .nav { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; justify-content: space-around; gap: 0; background: #fff; border-top: 1px solid var(--line); padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); }
+  .nav a { flex-direction: column; gap: 2px; font-size: 11px; padding: 6px 4px; border-radius: 10px; flex: 1; text-align: center; }
+  .nav a.on { background: var(--blue-l); color: var(--blue); }
+  .nav em { position: absolute; top: 2px; right: 18%; }
+}
+
+/* ---------- basics ---------- */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; box-shadow: var(--shadow); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--navy); font: 600 15px var(--font); text-decoration: none; cursor: pointer; transition: transform .08s, background .15s; }
+.btn:hover { border-color: var(--navy); }
+.btn:active { transform: scale(.98); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.btn.primary:hover { background: var(--blue-d); }
+.btn.on { background: var(--yellow); border-color: var(--yellow); }
+.btn.danger { color: var(--bad); }
+.btn.danger:hover { border-color: var(--bad); }
+.btn.sm { min-height: 36px; padding: 6px 14px; font-size: 14px; }
+.btn.wide { width: 100%; }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+.back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-weight: 600; margin-bottom: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 650; padding: 4px 10px; border-radius: 999px; color: var(--c, var(--blue)); background: color-mix(in srgb, var(--c, var(--blue)) 10%, #fff); }
+.chip .ic { width: 15px; height: 15px; }
+.bar { height: 8px; border-radius: 9px; background: var(--line-2); overflow: hidden; margin: 8px 0 4px; }
+.bar i { display: block; height: 100%; background: var(--blue); border-radius: 9px; }
+.ring-bg { fill: none; stroke: var(--line-2); stroke-width: 8; }
+.ring-fg { fill: none; stroke: var(--blue); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .6s; }
+.ring text { font: 800 18px var(--font); fill: var(--navy); }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+@media (max-width: 900px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+.page-h { margin-bottom: 20px; }
+.page-h h1 { display: flex; align-items: center; gap: 10px; }
+.page-h h1 .ic { width: 30px; height: 30px; color: var(--blue); }
+.sec-t { margin: 32px 0 4px; }
+.sec-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.sec-row .sec-t { margin-bottom: 0; }
+.empty { padding: 24px 0; }
+.disclaimer { font-size: 13px; color: var(--muted); border-left: 3px solid var(--yellow); padding: 6px 12px; margin-top: 28px; }
+.notice { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: var(--r-s); background: var(--yellow-l); border: 1px solid #F3DC85; margin-bottom: 16px; font-size: 14px; }
+.notice.rejected { background: var(--bad-l); border-color: #F5C2BC; }
+.err { color: var(--bad); font-size: 14px; min-height: 1em; margin: 0; }
+#toast { position: fixed; left: 50%; bottom: 90px; transform: translate(-50%, 20px); background: var(--navy); color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; opacity: 0; pointer-events: none; transition: .25s; z-index: 50; max-width: calc(100vw - 32px); text-align: center; }
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+.sheet-bg { position: fixed; inset: 0; background: rgba(7, 26, 50, .45); display: grid; place-items: center; z-index: 40; padding: 16px; }
+.sheet { position: relative; background: #fff; border-radius: var(--r); padding: 24px; max-width: 460px; width: 100%; }
+.sheet .x, .icon-btn { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--line-2); display: grid; place-items: center; cursor: pointer; color: var(--navy); }
+.temp { font: 700 24px ui-monospace, monospace; letter-spacing: .08em; background: var(--yellow-l); padding: 12px; border-radius: var(--r-s); text-align: center; }
+
+/* ---------- forms ---------- */
+.form { display: flex; flex-direction: column; gap: 14px; }
+.form label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; }
+.form small { font-weight: 400; color: var(--muted); }
+input, select, textarea { font: 16px var(--font); color: var(--ink); padding: 11px 12px; border: 1.5px solid var(--line); border-radius: var(--r-s); background: #fff; width: 100%; }
+input:focus, select:focus, textarea:focus { outline: 3px solid color-mix(in srgb, var(--blue) 25%, transparent); border-color: var(--blue); }
+textarea { resize: vertical; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .two { grid-template-columns: 1fr; } }
+fieldset { border: 0; padding: 0; margin: 0; }
+legend { font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.form label.check, label.check { flex-direction: row; align-items: flex-start; gap: 10px; font-weight: 400; font-size: 14px; }
+.checks label.check { border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 12px; align-items: center; }
+.checks label.check:has(input:checked) { border-color: var(--blue); background: var(--blue-l); }
+label.check input { width: 18px; height: 18px; margin: 2px 0 0; flex: none; accent-color: var(--blue); }
+label.check.inline { align-items: center; white-space: nowrap; }
+.search { display: flex; align-items: center; gap: 8px; border: 1.5px solid var(--line); border-radius: 999px; padding: 0 14px; background: #fff; flex: 1; min-width: 200px; }
+.search input { border: 0; padding: 10px 0; outline: none; }
+.search.wide { max-width: 520px; margin-bottom: 16px; }
+.tabs { display: inline-flex; background: var(--line-2); border-radius: 999px; padding: 4px; gap: 2px; flex-wrap: wrap; }
+.tabs button { border: 0; background: none; font: 600 14px var(--font); padding: 8px 14px; border-radius: 999px; cursor: pointer; color: var(--muted); }
+.tabs button.on { background: #fff; color: var(--navy); box-shadow: var(--shadow); }
+.tabs em { font-style: normal; color: var(--muted); font-weight: 500; }
+
+/* ---------- auth ---------- */
+.auth { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+.auth-side { background: var(--navy); color: #fff; padding: 40px clamp(24px, 5vw, 64px); display: flex; flex-direction: column; gap: 28px; }
+.auth-side .logo-t { color: #fff; }
+.auth-side .logo-t b { color: var(--yellow); }
+.auth-side h1 { font-size: clamp(26px, 3.4vw, 40px); max-width: 520px; }
+.auth-side a { color: var(--yellow); }
+.sell { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; max-width: 520px; }
+.sell li { display: flex; gap: 14px; }
+.sell .ic { width: 26px; height: 26px; color: var(--yellow); margin-top: 2px; }
+.sell b { display: block; }
+.sell span { color: #C9D3E3; font-size: 15px; }
+.auth-side .small { margin-top: auto; color: #C9D3E3; }
+.auth-main { display: grid; place-items: center; padding: 32px 16px; }
+.auth-card { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 16px; }
+.auth-card .tabs { align-self: flex-start; }
+.done-box { text-align: center; padding: 12px 0; }
+.ic.ok { color: var(--ok); }
+@media (max-width: 860px) { .auth { grid-template-columns: 1fr; } .auth-side { padding: 24px 16px; gap: 18px; } .auth-side .sell, .auth-side .small { display: none; } }
+
+/* ---------- home ---------- */
+.welcome { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 18px; }
+.welcome > div:first-child { max-width: 620px; }
+.lv { min-width: 240px; padding: 14px 18px; }
+.lv-n { display: inline-block; background: var(--yellow); color: var(--navy); font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 999px; margin-right: 6px; }
+.continue { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; border-left: 6px solid var(--yellow); }
+.continue h2 { margin: 0 0 4px; }
+.continue p { margin: 0; }
+@media (max-width: 560px) { .continue { gap: 14px; } .continue .grow { flex: 1 1 calc(100% - 110px); min-width: 0; } .continue > .btn, .continue > a.btn, .continue > div:last-child:not(.grow) { width: 100%; } .continue .btn { width: 100%; justify-content: center; } }
+.deadline { background: linear-gradient(135deg, #fff 60%, var(--yellow-l)); }
+
+/* ---------- academy ---------- */
+.course-hero { display: flex; gap: 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--navy); color: #fff; border-radius: 24px; padding: clamp(22px, 4vw, 40px); margin-bottom: 28px; }
+.course-hero > div:first-child { max-width: 640px; }
+.course-hero .eyebrow { color: var(--yellow); }
+.course-hero p { color: #D5DDEA; font-size: 18px; }
+.course-hero .meta { display: flex; align-items: center; gap: 8px; color: #C9D3E3; font-size: 14px; margin-bottom: 18px; }
+.course-hero .btn:not(.primary) { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .4); }
+.course-hero .btn.primary { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
+.hero-ring { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #C9D3E3; font-size: 14px; }
+.hero-ring .ring-bg { stroke: rgba(255, 255, 255, .15); }
+.hero-ring .ring-fg { stroke: var(--yellow); }
+.hero-ring .ring text { fill: #fff; font-size: 26px; }
+.path { list-style: none; padding: 0; margin: 0; position: relative; display: grid; gap: 14px; }
+.path::before { content: ""; position: absolute; left: 31px; top: 20px; bottom: 20px; border-left: 3px dashed var(--line); }
+.node-a { position: relative; display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 14px 18px 14px 10px; text-decoration: none; color: inherit; box-shadow: var(--shadow); }
+a.node-a[href]:hover { border-color: var(--blue); }
+.node-dot { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--line-2); color: var(--muted); flex: none; z-index: 1; }
+.node-dot.big { width: 64px; height: 64px; background: var(--blue); color: #fff; }
+.node-dot.big .ic { width: 30px; height: 30px; }
+.node.open .node-dot { background: var(--blue); color: #fff; box-shadow: 0 0 0 5px var(--blue-l); }
+.node.done .node-dot { background: var(--ok); color: #fff; }
+.node.locked .node-a { opacity: .6; box-shadow: none; }
+.node-b { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.node-b .eyebrow { margin: 0; }
+.node-n { font-size: 13px; color: var(--muted); white-space: nowrap; }
+@media (max-width: 560px) { .node-n { display: none; } }
+.soon { box-shadow: none; background: transparent; border-style: dashed; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.soon .chip { --c: #8A6D00; background: var(--yellow-l); }
+.unit-h { display: flex; gap: 18px; align-items: center; margin-bottom: 20px; }
+.acts { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 10px; }
+.act-row { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; text-decoration: none; color: inherit; }
+.act-row:hover { border-color: var(--blue); }
+.act-row > div { flex: 1; display: flex; flex-direction: column; }
+.act-row .eyebrow { margin: 0; }
+.act-i { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--blue-l); color: var(--blue); flex: none; }
+.act-row.done .act-i { background: var(--ok-l); color: var(--ok); }
+
+/* lesson player */
+.player { max-width: 760px; margin: 0 auto; }
+.player-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.player-top .icon-btn { position: static; }
+.steps { flex: 1; display: flex; gap: 5px; }
+.steps i { flex: 1; height: 8px; border-radius: 9px; background: var(--line); }
+.steps i.done { background: var(--ok); }
+.steps i.now { background: var(--blue); }
+.xp-pill { display: inline-flex; gap: 4px; align-items: center; font-weight: 700; font-size: 14px; background: var(--yellow); padding: 4px 10px; border-radius: 999px; }
+.xp-pill .ic { width: 16px; height: 16px; }
+.act { padding: clamp(20px, 4vw, 32px); scroll-margin-bottom: 120px; }
+.fb { scroll-margin-bottom: 120px; }
+.act h2 { font-size: clamp(20px, 3vw, 26px); }
+.lead { font-size: 18px; }
+.player-foot { position: sticky; bottom: 0; padding: 14px 0; background: linear-gradient(transparent, var(--cream) 30%); }
+@media (max-width: 860px) { .player-foot { bottom: 64px; } }
+.points { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 10px; }
+.points li { display: flex; gap: 10px; }
+.points .ic { color: var(--ok); margin-top: 2px; }
+.tip { display: flex; gap: 12px; background: var(--yellow-l); border-radius: var(--r-s); padding: 14px; margin-top: 16px; }
+.tip .ic { color: #9A7400; }
+.tip p { margin: 0; }
+.scenario { display: flex; gap: 12px; background: var(--blue-l); border-radius: var(--r-s); padding: 14px; margin-bottom: 14px; }
+.scenario .ic { color: var(--blue); margin-top: 2px; }
+.scenario p { margin: 0; font-weight: 500; }
+.opts { display: grid; gap: 10px; margin: 14px 0; }
+.opt { display: flex; align-items: center; gap: 12px; text-align: left; padding: 14px; border: 1.5px solid var(--line); border-radius: 14px; background: #fff; font: 500 16px var(--font); color: var(--ink); cursor: pointer; }
+.opt:hover:not(:disabled) { border-color: var(--blue); }
+.opt-l { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: var(--line-2); font-weight: 800; flex: none; }
+.opt.sel { border-color: var(--blue); background: var(--blue-l); }
+.opt.sel .opt-l { background: var(--blue); color: #fff; }
+.opt.right { border-color: var(--ok); background: var(--ok-l); }
+.opt.right .opt-l { background: var(--ok); color: #fff; }
+.opt.wrong { border-color: var(--bad); background: var(--bad-l); }
+.opt.wrong .opt-l { background: var(--bad); color: #fff; }
+.fb { display: flex; gap: 12px; padding: 14px; border-radius: var(--r-s); margin-top: 12px; animation: pop .25s; }
+.fb .ic { flex: none; margin-top: 2px; }
+.fb.ok { background: var(--ok-l); } .fb.ok > .ic { color: var(--ok); }
+.fb.no { background: var(--bad-l); } .fb.no > .ic { color: var(--bad); }
+.fb ol { margin: 6px 0; padding-left: 20px; }
+@keyframes pop { from { transform: translateY(6px); opacity: 0; } }
+.flip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px; }
+.flip { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; text-align: left; min-height: 150px; padding: 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--navy); color: #fff; font: 16px var(--font); cursor: pointer; transition: background .25s; }
+.flip-i { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: rgba(255, 255, 255, .12); color: var(--yellow); }
+.flip-d { display: none; font-size: 15px; }
+.flip-hint { margin-top: auto; font-size: 13px; color: #C9D3E3; }
+.flip.open { background: #fff; color: var(--ink); border-color: var(--blue); }
+.flip.open .flip-i { background: var(--blue-l); color: var(--blue); }
+.flip.open .flip-d { display: block; }
+.flip.open .flip-hint { display: none; }
+.tf { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 12px; counter-reset: tf; }
+.tf li { border: 1.5px solid var(--line); border-radius: 14px; padding: 14px; }
+.tf li.right { border-color: var(--ok); } .tf li.wrong { border-color: var(--bad); }
+.tf p { font-weight: 500; }
+.tf-b { display: flex; gap: 8px; }
+.tf-b button { flex: 1; min-height: 42px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; font: 600 15px var(--font); cursor: pointer; }
+.tf-b button.sel { background: var(--navy); color: #fff; border-color: var(--navy); }
+.pool { display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; padding: 12px; border-radius: 14px; background: var(--line-2); margin: 10px 0 14px; }
+.tile { border: 1.5px solid var(--line); background: #fff; border-radius: 12px; padding: 9px 12px; font: 500 15px var(--font); color: var(--ink); text-align: left; cursor: pointer; box-shadow: 0 1px 2px rgba(16, 28, 56, .08); }
+.tile.sel { border-color: var(--blue); background: var(--blue); color: #fff; transform: translateY(-2px); }
+.tile small { display: block; font-size: 12px; color: var(--bad); margin-top: 2px; }
+.tile.right { border-color: var(--ok); background: var(--ok-l); }
+.tile.wrong { border-color: var(--bad); background: var(--bad-l); }
+.buckets { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 560px) { .buckets { grid-template-columns: 1fr; } }
+.bucket { display: flex; flex-direction: column; gap: 8px; min-height: 120px; padding: 12px; border: 2px dashed var(--line); border-radius: 14px; cursor: pointer; }
+.bucket:hover { border-color: var(--blue); background: var(--blue-l); }
+.bucket > b { font-size: 14px; color: var(--blue); }
+.order { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 8px; }
+.order li { display: flex; align-items: center; gap: 12px; border: 1.5px solid var(--line); border-radius: 14px; padding: 10px 12px; background: #fff; }
+.order li.right { border-color: var(--ok); background: var(--ok-l); } .order li.right .ic { color: var(--ok); }
+.order li.wrong { border-color: var(--bad); background: var(--bad-l); }
+.order li small { color: var(--bad); white-space: nowrap; font-size: 12px; }
+.order .num { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px; flex: none; }
+.order .t { flex: 1; }
+.mv { display: flex; gap: 4px; }
+.mv button { width: 38px; height: 38px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; font-size: 18px; cursor: pointer; }
+.mv button:disabled { opacity: .3; }
+.celebrate { text-align: center; max-width: 620px; margin: 20px auto; padding: 36px 24px; }
+.medal { width: 96px; height: 96px; margin: 0 auto 16px; border-radius: 50%; display: grid; place-items: center; background: var(--yellow); color: var(--navy); box-shadow: 0 0 0 10px var(--yellow-l); animation: pop .4s; }
+.medal .ic { width: 46px; height: 46px; }
+.medal.grey { background: var(--line); box-shadow: 0 0 0 10px var(--line-2); }
+.big-score { font-size: 44px; font-weight: 800; margin: 0; }
+.tip-course { max-width: 620px; margin: 0 auto; }
+
+/* course CTA */
+.cta-course { border: 1.5px solid color-mix(in srgb, var(--c) 35%, #fff); background: color-mix(in srgb, var(--c) 6%, #fff); border-radius: var(--r); padding: 16px; margin-top: 16px; }
+.cta-k { display: flex; align-items: center; gap: 8px; font-weight: 750; color: var(--c); margin-bottom: 8px; }
+.cta-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: inherit; margin-top: 8px; }
+.cta-item:hover { border-color: var(--c); }
+.cta-item div { display: flex; flex-direction: column; }
+.cta-item span { color: var(--muted); font-size: 14px; }
+.cta-item small { display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--navy); margin-top: 4px; }
+.cta-item small .ic { width: 15px; height: 15px; }
+
+/* ---------- resources ---------- */
+.filters { display: grid; gap: 12px; margin-bottom: 8px; }
+.pchips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.pchips button { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 14px; font: 600 14px var(--font); color: var(--navy); cursor: pointer; }
+.pchips button .ic { color: var(--c, var(--blue)); width: 17px; height: 17px; }
+.pchips button.on { background: var(--c, var(--navy)); border-color: var(--c, var(--navy)); color: #fff; }
+.pchips button.on .ic { color: #fff; }
+.frow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.frow select { width: auto; border-radius: 999px; }
+.path-intro { display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: var(--r); background: color-mix(in srgb, var(--c) 8%, #fff); margin-top: 12px; }
+.path-intro .ic { color: var(--c); width: 28px; height: 28px; }
+.path-intro div { display: flex; flex-direction: column; }
+.res { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; border-top: 5px solid var(--c); transition: transform .15s; }
+.res:hover { transform: translateY(-2px); border-color: var(--c); }
+.res p { margin: 0; font-size: 15px; flex: 1; }
+.res-top { display: flex; justify-content: space-between; align-items: center; }
+.fav-on { color: #B58900; }
+.res-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.res-meta span { display: inline-flex; gap: 4px; align-items: center; }
+.res-meta .ic { width: 15px; height: 15px; }
+.res-meta.big { font-size: 15px; margin: 12px 0 16px; }
+.resource { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: clamp(20px, 4vw, 40px); border-top: 8px solid var(--c); box-shadow: var(--shadow); }
+.resource header { margin-bottom: 8px; }
+.resource h1 { margin-top: 12px; }
+.resource section { margin-top: 22px; }
+.resource h2 { font-size: 18px; color: var(--c); }
+.steps-l { padding-left: 0; list-style: none; counter-reset: s; display: grid; gap: 10px; }
+.steps-l li { counter-increment: s; display: flex; gap: 12px; }
+.steps-l li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px; flex: none; }
+.print-only { display: none; }
+
+/* ---------- courses ---------- */
+.fund { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; background: var(--yellow-l); border-color: #F3DC85; }
+.fund .ic.big { color: var(--navy); }
+.fund p { margin: 0; }
+.course { display: flex; flex-direction: column; gap: 6px; border-top: 5px solid var(--c); }
+.course h3 { margin: 8px 0 0; }
+.course .muted { flex: 1; }
+.facts { list-style: none; padding: 0; margin: 4px 0 12px; display: grid; gap: 6px; font-size: 14px; }
+.facts li { display: flex; gap: 8px; align-items: center; }
+.facts .ic { width: 17px; height: 17px; color: var(--c); }
+.schools { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; background: var(--navy); color: #fff; }
+.schools .muted { color: #C9D3E3; margin: 0; }
+.pathways { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+.pw { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: var(--r); background: #fff; border: 1px solid var(--line); text-decoration: none; color: inherit; }
+.pw:hover { border-color: var(--c); }
+.pw .ic { color: var(--c); width: 26px; height: 26px; }
+.pw span { font-size: 14px; color: var(--muted); flex: 1; }
+.pw em { font-style: normal; font-size: 13px; font-weight: 650; color: var(--c); }
+
+/* ---------- profile and admin ---------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; flex-direction: column; }
+.stat b { font-size: 26px; font-weight: 800; }
+.stat span { color: var(--muted); font-size: 13px; }
+.card h2 { display: flex; align-items: center; gap: 8px; font-size: 18px; }
+.row-link { display: flex; align-items: center; gap: 12px; padding: 10px 0; text-decoration: none; color: inherit; border-bottom: 1px solid var(--line-2); }
+.row-link span { flex: 1; display: flex; flex-direction: column; }
+.row-link small { color: var(--muted); }
+.note { padding: 10px 0; border-bottom: 1px solid var(--line-2); }
+.note p { margin: 4px 0 0; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+.adm-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 8px 0 16px; }
+.users { display: grid; gap: 12px; }
+.user-h { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.user-h > div { display: flex; flex-direction: column; }
+.user dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px 16px; margin: 12px 0; }
+.user dt { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.user dd { margin: 0; font-size: 14px; }
+.status { font-size: 12px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--line-2); }
+.status.pending { background: var(--yellow); color: var(--navy); }
+.status.approved { background: var(--ok-l); color: var(--ok); }
+.status.rejected { background: var(--bad-l); color: var(--bad); }
+.user.pending { border-left: 5px solid var(--yellow); }
+
+/* ---------- glossary ---------- */
+.gloss { display: grid; gap: 10px; margin: 0; }
+.gloss div { background: #fff; border: 1px solid var(--line); border-radius: var(--r-s); padding: 12px 16px; }
+.gloss dt { font-weight: 800; color: var(--blue); }
+.gloss dd { margin: 2px 0 0; }
+
+/* ---------- certificate ---------- */
+.cert { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 18px; margin-top: 16px; box-shadow: var(--shadow); }
+.cert-in { border: 3px solid var(--navy); outline: 1px solid var(--yellow); outline-offset: -10px; border-radius: 10px; padding: clamp(24px, 5vw, 56px); text-align: center; background: linear-gradient(180deg, #fff, var(--cream)); }
+.cert-in .mark { display: block; margin: 0 auto 10px; }
+.row .back { margin: 0; }
+.cert-in h1 { font-size: clamp(28px, 5vw, 44px); margin: 12px 0 18px; }
+.cert-name { font-size: clamp(26px, 5vw, 40px); font-weight: 800; color: var(--blue); border-bottom: 2px solid var(--yellow); display: inline-block; padding: 0 16px 4px; }
+.cert-course { font-size: 22px; font-weight: 750; }
+.cert-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--line); margin-top: 28px; padding-top: 14px; font-size: 14px; font-weight: 600; }
+.cert-note { font-size: 12px; color: var(--muted); margin: 12px 0 0; }
+
+/* ---------- print ---------- */
+@media print {
+  @page { margin: 14mm; }
+  body { background: #fff; }
+  .top, .nav, .foot, .no-print, .back, #toast { display: none !important; }
+  .view { padding: 0; max-width: none; }
+  .resource, .cert { box-shadow: none; border: 0; padding: 0; }
+  .print-only { display: block; margin-top: 24px; color: var(--muted); }
+  .cert-in { break-inside: avoid; }
+}
+</style></head><body>
+<script>
+/* ============ eMove Academy: pathways and courses (source: emoveacademy.com, October 2026) ============ */
+const EMOVE_SITE = "https://www.emoveacademy.com";
+const EMOVE_MAIL = "emovecourses@gmail.com";
+
+const PATHWAYS = [
+  { id: "future", name: "Future Learning", icon: "spark", color: "#1965B8", line: "AI, digital pedagogy and emerging technologies reshaping the classroom." },
+  { id: "excellence", name: "Teaching Excellence", icon: "target", color: "#0E7C66", line: "Evidence-based strategies that elevate teaching craft and student outcomes." },
+  { id: "wellbeing", name: "Wellbeing", icon: "heart", color: "#C2410C", line: "Nurturing teacher and student wellbeing in resilient learning communities." },
+  { id: "inclusion", name: "Inclusion", icon: "hands", color: "#7C3AED", line: "Designing equitable, accessible and culturally responsive learning for all." },
+  { id: "citizenship", name: "European Citizenship", icon: "stars", color: "#1D4ED8", line: "European identity, shared values, rights and democratic participation across borders." },
+  { id: "leadership", name: "Leadership", icon: "compass", color: "#101C38", line: "Leading schools, departments and teams through change and innovation." },
+  { id: "sustainability", name: "Sustainability", icon: "leaf", color: "#15803D", line: "Education for sustainable development and global citizenship." }
+];
+const pathwayById = id => PATHWAYS.find(p => p.id === id) || PATHWAYS[0];
+
+const EMOVE_COURSES = [
+  { id: "game-on", title: "GAME ON!", sub: "Turn learning into challenges, missions and experiences students want to join", pathway: "future", city: "Barcelona", dates: "5–9 July 2027", slug: "game-on" },
+  { id: "ai-teacher", title: "AI Teacher 360º", sub: "Transform your teaching with ethical artificial intelligence", pathway: "future", city: "Barcelona", dates: "5–9 July 2027", slug: "ai-teachers-360-from-zero-to-hero" },
+  { id: "think", title: "THINK!", sub: "Teach students how to think, not what to think", pathway: "excellence", city: "Cádiz", dates: "12–16 July 2027", slug: "think" },
+  { id: "shine", title: "Every Student Can Shine", sub: "Turn learning differences into opportunities for success", pathway: "inclusion", city: "Cádiz", dates: "12–16 July 2027", slug: "every-student-can-shine" },
+  { id: "outside", title: "OUTSIDE THE BOX!", sub: "Take learning beyond the classroom walls", pathway: "sustainability", city: "Asturias", dates: "19–23 July 2027", slug: "outside-the-box" },
+  { id: "happy", title: "The Happy Teacher", sub: "Prevent burnout and rediscover the joy of teaching", pathway: "wellbeing", city: "Asturias", dates: "19–23 July 2027", slug: "the-happy-teacher" }
+].map(c => Object.assign(c, { days: "5 days · 25 training hours", lang: "English", price: "€480", url: EMOVE_SITE + "/courses/" + c.slug }));
+const courseById = id => EMOVE_COURSES.find(c => c.id === id);
+/* the eMove course that continues a pathway; pathways without a course yet point to the tailor-made offer for schools */
+const coursesFor = pid => EMOVE_COURSES.filter(c => c.pathway === pid);
+const FOR_SCHOOLS = { title: "Tailor-made courses for your school", sub: "Group mobilities and bespoke courses designed around your school's goals", url: EMOVE_SITE + "/for-schools" };
+
+const STAGES = ["Early childhood", "Primary", "Lower secondary", "Upper secondary", "Vocational (VET)", "Adult education", "All stages"];
+const ROLES = [["teacher", "Teacher"], ["coordinator", "Erasmus+ / international coordinator"], ["head", "School leader"], ["trainer", "Teacher trainer"], ["other", "Other"]];
+const COUNTRIES = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", "Romania", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Türkiye", "Other"];
+
+/* ============ Academy content ============
+   Course → Unit → Activity. Activity types (handled in academy.js):
+   learn  · read a short idea with key points
+   cards  · tap to discover a set of cards
+   choice · one correct option, feedback on every option (with an optional scenario)
+   tf     · true or false statements, explained
+   sort   · put each item in the right box
+   order  · put the steps in the right order
+   reflect· write a short answer that stays in "My notes"
+   Rules are summarised from the Erasmus+ Programme Guide; every unit reminds teachers to check the current guide. */
+const COURSES = [{
+  id: "erasmus-101",
+  title: "Erasmus+ from scratch",
+  sub: "How a teacher gets funded to learn abroad, step by step",
+  minutes: 60,
+  units: [
+    {
+      id: "u1", title: "What Erasmus+ offers teachers", goal: "Understand what Erasmus+ pays for and who applies.", icon: "stars",
+      activities: [
+        { type: "learn", title: "Erasmus+ in one minute", body: "Erasmus+ is the European Union's programme for education, training, youth and sport (2021–2027). For teachers and school staff it funds **learning abroad**: courses, observing colleagues in another school and teaching in a partner school.", points: ["The **school** applies, not the individual teacher.", "The grant covers travel, daily costs and course fees.", "Each country has a **National Agency** that runs the calls and answers questions."], tip: "If your school has never applied, nothing is lost: there is an entry route designed for newcomers (unit 2)." },
+        { type: "cards", title: "Three ways to learn abroad", intro: "Tap each card to discover the three staff mobility activities in school education.", cards: [
+          { t: "Courses and training", d: "A structured course with other European teachers, from 2 to 30 days. eMove courses belong here.", icon: "academy" },
+          { t: "Job shadowing", d: "You spend 2 to 60 days observing colleagues in a school or organisation abroad.", icon: "eye" },
+          { t: "Teaching assignment", d: "You teach in a partner school abroad, from 2 to 365 days.", icon: "teacher" }
+        ] },
+        { type: "sort", q: "Key Action 1 or Key Action 2? Put each project in its box.", buckets: ["KA1 · Learning mobility", "KA2 · Cooperation between organisations"], items: [
+          { t: "A teacher attends a 5-day course in Cádiz", b: 0 },
+          { t: "Two schools co-design a climate curriculum over two years", b: 1 },
+          { t: "A coordinator shadows a colleague in Finland", b: 0 },
+          { t: "Five schools build shared teaching materials together", b: 1 },
+          { t: "A group of pupils travels to a partner school", b: 0 }
+        ], explain: "KA1 moves **people** to learn (staff and pupils). KA2 funds **organisations** working together on a shared product or practice." },
+        { type: "choice", q: "Who submits the Erasmus+ application for a teacher's course?", options: ["The teacher, on their own", "The school (or a consortium it belongs to)", "The course provider", "The Ministry of Education"], answer: 1, why: ["Individual teachers cannot apply for school staff mobility on their own.", "Correct. The school, or a consortium led for example by a regional education authority, applies to the National Agency.", "Providers like eMove give you the programme and certificate, but they do not apply for you.", "Ministries set policy; applications go to the National Agency."] },
+        { type: "tf", title: "True or false?", items: [
+          { s: "Only language teachers can take part in Erasmus+.", a: false, why: "Any school staff can take part: teachers of every subject, leaders, counsellors and support staff." },
+          { s: "Erasmus+ can pay the fee of a structured course.", a: true, why: "Course fees are a specific budget item for courses and training." },
+          { s: "You need to speak perfect English to go.", a: false, why: "You need enough language to learn. Many teachers prepare with online courses before leaving." }
+        ] }
+      ]
+    },
+    {
+      id: "u2", title: "Choose your route", goal: "Know which door your school can use: KA122, accreditation or a consortium.", icon: "compass",
+      activities: [
+        { type: "learn", title: "Three doors into Erasmus+", body: "Schools reach Erasmus+ mobility through one of three doors. Which one depends on your experience and on how many mobilities you plan.", points: ["**KA122 short-term project**: no accreditation needed. Up to 30 participants, a project of 6 to 18 months. The usual first step.", "**Erasmus accreditation (KA120)**: a long-term Erasmus Plan. Accredited schools then request a budget every year through **KA121**.", "**Consortium**: join a group led by a coordinator (often a regional or local education authority) that already holds an accreditation."], tip: "Main deadlines are usually in February; some countries open a second KA122 round in the autumn. Always check your National Agency's calendar." },
+        { type: "choice", scenario: "Your school has never done Erasmus+. Four teachers want to take a course next summer.", q: "Which route fits best?", options: ["KA122 short-term project", "KA121 accredited project", "A KA2 cooperation partnership"], answer: 0, why: ["Correct. KA122 is designed for organisations without accreditation that want a manageable first project.", "KA121 is only for schools that already hold an Erasmus accreditation.", "KA2 funds cooperation projects between organisations, not individual training."] },
+        { type: "choice", scenario: "Your school holds an Erasmus accreditation and has a five-year Erasmus Plan.", q: "How does it get money for this year's mobilities?", options: ["It writes a full new project every year", "It requests a budget through KA121", "It waits for a consortium to invite it"], answer: 1, why: ["Accredited schools do not need to write a full project each time.", "Correct. The accreditation is the quality badge; KA121 is the yearly budget request.", "Accredited schools apply in their own name."] },
+        { type: "choice", scenario: "A small rural school has no time to manage a project but would like two teachers to train abroad.", q: "What is the simplest option?", options: ["Give up for this year", "Ask the regional education authority or the National Agency about joining a consortium", "Ask the teachers to apply individually"], answer: 1, why: ["There is an easier door for small schools.", "Correct. In a consortium the coordinator handles most of the management.", "Individual teachers cannot apply for school staff mobility."] },
+        { type: "order", q: "Put a KA122 application in order, from idea to grant.", steps: ["Identify your school's needs", "Set objectives for the project", "Choose activities and providers", "Register the school (OID) and apply to the National Agency before the deadline", "Evaluation, results and grant agreement"], explain: "Needs come first. The course you choose must answer them; that is what evaluators look for." },
+        { type: "reflect", q: "Which route fits your school today, and why?", placeholder: "For example: KA122, because we have never applied and want a small first project…" }
+      ]
+    },
+    {
+      id: "u3", title: "Plan a mobility that changes things", goal: "Link objectives, course choice and preparation to your school's needs.", icon: "target",
+      activities: [
+        { type: "learn", title: "Needs first, destination second", body: "Strong projects start from what the school needs, not from a city. Every mobility should answer a need and come back as a change in class or in the school.", points: ["Write objectives that are **specific and measurable**.", "Choose courses whose **learning outcomes** match those objectives.", "Plan how you will **share** what you learn before you leave."], tip: "The Erasmus Quality Standards ask for good preparation, support during the mobility and sharing afterwards." },
+        { type: "sort", q: "Strong or weak objective? Sort them.", buckets: ["Strong objective", "Too vague"], items: [
+          { t: "Improve our school", b: 1 },
+          { t: "By June, three teachers use game-based learning in Year 7 maths and share it with their department", b: 0 },
+          { t: "Learn new things in Europe", b: 1 },
+          { t: "Reduce early burnout signs: run a wellbeing routine with staff every term", b: 0 },
+          { t: "Be more innovative", b: 1 }
+        ], explain: "A strong objective says **who** does **what**, **by when**, and how you will know it happened." },
+        { type: "choice", q: "You are choosing a course. What matters most for your application?", options: ["The cheapest course", "Learning outcomes that match your objectives", "The most beautiful destination", "The longest course available"], answer: 1, why: ["Cost matters, but evaluators look at relevance first.", "Correct. Relevance to your needs is what makes a mobility worth funding.", "A great place helps motivation, but it is not a reason in itself.", "Longer is not better; it must fit your objectives and timetable."] },
+        { type: "sort", q: "Before, during or after the mobility?", buckets: ["Before", "During", "After"], items: [
+          { t: "Agree learning objectives with your school", b: 0 },
+          { t: "Keep a learning journal", b: 1 },
+          { t: "Run a workshop for colleagues", b: 2 },
+          { t: "Prepare language and practical details", b: 0 },
+          { t: "Network with teachers from other countries", b: 1 },
+          { t: "Try a new method with your class", b: 2 }
+        ], explain: "The impact of a mobility is built **before** (clear goals) and **after** (sharing and applying), not only during the course." },
+        { type: "reflect", q: "Write one objective for your own mobility.", placeholder: "Who, what, by when, and how you will know it happened…" }
+      ]
+    },
+    {
+      id: "u4", title: "The money", goal: "Know what the grant covers and how it is calculated.", icon: "wallet",
+      activities: [
+        { type: "cards", title: "What the grant can cover", intro: "Erasmus+ mostly uses **unit costs**: fixed amounts per participant, per day or per distance. Tap each card.", cards: [
+          { t: "Travel", d: "A fixed amount based on the distance band between your town and the destination. Green travel can receive a higher amount.", icon: "plane" },
+          { t: "Individual support", d: "A daily amount for accommodation and living costs. It depends on the destination country.", icon: "home" },
+          { t: "Course fees", d: "For courses and training: an amount per participant per day of the course, up to a maximum per participant.", icon: "academy" },
+          { t: "Organisational support", d: "A fixed amount per participant for the school's work: preparation, follow-up and sharing.", icon: "school" },
+          { t: "Inclusion support", d: "Extra funding for participants with fewer opportunities or special needs.", icon: "hands" }
+        ] },
+        { type: "sort", q: "Can the grant pay for it?", buckets: ["Covered by the grant", "Not covered"], items: [
+          { t: "The flight or train to the course", b: 0 },
+          { t: "Accommodation and meals during the course", b: 0 },
+          { t: "The course fee", b: 0 },
+          { t: "Extra holiday days after the course", b: 1 },
+          { t: "Souvenirs for the staff room", b: 1 }
+        ], explain: "The grant covers the learning activity and the days needed to travel. Private extensions are paid by the participant." },
+        { type: "choice", q: "How is the course-fee grant calculated?", options: ["The real invoice, whatever it costs", "A fixed amount per participant per day, up to a maximum", "A percentage of the school budget"], answer: 1, why: ["Erasmus+ does not reimburse invoices for course fees; it uses unit costs.", "Correct. Check the current Programme Guide for the daily amount and the maximum.", "The grant is calculated per participant, not from the school budget."] },
+        { type: "tf", title: "True or false?", items: [
+          { s: "Choosing a train instead of a plane can increase the travel grant.", a: true, why: "Green travel (train, bus, car-sharing) receives a higher travel amount." },
+          { s: "Daily amounts are the same in every destination.", a: false, why: "Individual support depends on the destination country group and is set by each National Agency within EU ranges." }
+        ] }
+      ]
+    },
+    {
+      id: "u5", title: "Before, during and after", goal: "Turn your mobility into impact you can show.", icon: "route",
+      activities: [
+        { type: "learn", title: "Coming back is where it starts", body: "Your school has to show what changed thanks to the mobility. Teachers who share early and simply make that easy.", points: ["Ask for your **certificate of attendance** and a **Europass Mobility** document to record your new skills.", "Complete the **participant report** you receive by email after the mobility.", "Share with colleagues and the school community: a workshop, a post, an eTwinning project."], tip: "The school submits its final report in the Beneficiary Module. Your notes and photos help a lot." },
+        { type: "order", q: "Put the steps after your return in a sensible order.", steps: ["Complete the participant report", "Share what you learned with colleagues", "Try one new practice with your class", "Show the results to the school community", "The school includes everything in its final report"], explain: "Report, share, apply, show, document: a simple loop that evaluators recognise." },
+        { type: "choice", scenario: "You came back from a course on game-based learning.", q: "Which sharing activity has the most impact?", options: ["Post a photo of the beach", "A 30-minute workshop where colleagues try one activity", "Email the slides of the course to everyone", "Keep it for your own class"], answer: 1, why: ["A nice memory, but it shows no learning.", "Correct. Colleagues trying the activity is the fastest way to spread it.", "Slides without practice are rarely used.", "Erasmus+ expects the learning to benefit the whole school."] },
+        { type: "reflect", q: "Write one action you will take within two weeks of coming back.", placeholder: "For example: run a short workshop at the next staff meeting…" }
+      ]
+    }
+  ],
+  quiz: [
+    { q: "Who applies for an Erasmus+ grant for school staff?", options: ["The teacher", "The school or a consortium", "The course provider"], answer: 1 },
+    { q: "Which route is designed for schools without accreditation?", options: ["KA121", "KA122", "KA220"], answer: 1 },
+    { q: "How long can a structured course last?", options: ["2 to 30 days", "Exactly 5 days", "Up to one year"], answer: 0 },
+    { q: "What do accredited schools use to request their yearly budget?", options: ["KA121", "KA210", "eTwinning"], answer: 0 },
+    { q: "What should guide your choice of course?", options: ["The destination", "The price", "Your school's needs and objectives"], answer: 2 },
+    { q: "How does Erasmus+ calculate most grant items?", options: ["Real invoices", "Unit costs", "A lottery"], answer: 1 },
+    { q: "What can increase the travel grant?", options: ["Green travel", "Flying business class", "Travelling at weekends"], answer: 0 },
+    { q: "Which document records the skills you gained abroad?", options: ["Europass Mobility", "A boarding pass", "The OID"], answer: 0 }
+  ]
+}];
+
+const GLOSSARY = [
+  ["KA1", "Key Action 1: learning mobility of individuals (staff and pupils)."],
+  ["KA2", "Key Action 2: cooperation partnerships between organisations (KA210 small-scale, KA220 cooperation partnerships)."],
+  ["KA120", "Erasmus accreditation: a long-term Erasmus Plan that opens yearly KA121 funding."],
+  ["KA121", "Yearly budget request for accredited organisations."],
+  ["KA122", "Short-term mobility project for organisations without accreditation."],
+  ["National Agency", "The body in each country that manages Erasmus+ calls, grants and support."],
+  ["OID", "Organisation ID: the code your school needs before it can apply."],
+  ["Consortium", "A group of schools coordinated by one organisation that holds an accreditation and manages mobilities for all."],
+  ["Unit costs", "Fixed amounts per participant, per day or per distance used to calculate the grant."],
+  ["Green travel", "Travel by low-emission means such as train or bus, which receives a higher travel amount."],
+  ["Job shadowing", "Observing colleagues at work in a school or organisation abroad."],
+  ["Erasmus Quality Standards", "Common principles every mobility project must follow: good management, inclusion, sustainability and sharing results."],
+  ["Europass Mobility", "A European document that records the knowledge and skills gained during a stay abroad."],
+  ["Beneficiary Module", "The online tool where schools manage their project and submit the final report."],
+  ["ESEP", "European School Education Platform: news, courses and the eTwinning community in one place."],
+  ["eTwinning", "Free online community where schools collaborate on projects, now part of ESEP."]
+];
+
+/* ============ Teaching resources ============
+   Every resource belongs to one eMove pathway, so it can lead to the course that goes deeper. */
+const RES_TYPES = ["Activity", "Routine", "Lesson plan", "Rubric", "Template"];
+const RESOURCES = [
+  {
+    id: "mission-escape", title: "Mission: the 15-minute escape", pathway: "future", type: "Activity", stages: ["Primary", "Lower secondary", "Upper secondary"], minutes: 50,
+    summary: "Turn a revision lesson into a mission: teams unlock four locks by solving content challenges.",
+    objective: "Students review key content of a unit through cooperative challenges with immediate feedback.",
+    steps: ["Pick four key ideas of the unit and write one challenge for each (a question, a puzzle, a short problem).", "Give each answer a code: a number, a word or a colour that opens a 'lock'.", "Tell the story: the class has 15 minutes to free a trapped scientist, author or explorer.", "Teams of 3–4 solve the challenges in order. Check each code at your desk: right code, next envelope.", "Debrief for 10 minutes: which challenge was hardest and why?"],
+    materials: ["4 envelopes per team", "Printed challenges", "A visible timer"],
+    assessment: "Note which challenge blocked most teams: that is the content to reteach.",
+    variation: "Digital version: use a form that only advances with the right answer."
+  },
+  {
+    id: "ai-feedback-check", title: "AI as a critical friend", pathway: "future", type: "Lesson plan", stages: ["Upper secondary", "Vocational (VET)", "Adult education"], minutes: 55,
+    summary: "Students compare AI feedback with a rubric and decide what to accept, fix or reject.",
+    objective: "Students use AI responsibly: they evaluate its suggestions against criteria instead of copying them.",
+    steps: ["Students write a short paragraph (an argument, a lab conclusion, a description).", "They ask an AI tool for feedback using a prompt you give them.", "In pairs, they compare each AI suggestion with the class rubric: accept, adapt or reject, and write why.", "They rewrite the paragraph and highlight what changed.", "Close with a class rule: 'AI suggests, I decide'."],
+    materials: ["A simple 3-criteria rubric", "Access to an AI tool allowed by your school"],
+    assessment: "Grade the reasons in the accept/adapt/reject table, not only the final text.",
+    variation: "Without devices: print an AI answer in advance and do the comparison on paper."
+  },
+  {
+    id: "think-routine", title: "See, think, wonder in 10 minutes", pathway: "excellence", type: "Routine", stages: ["All stages"], minutes: 10,
+    summary: "A thinking routine to open any topic with an image, an object or a data chart.",
+    objective: "Students separate observation from interpretation and generate their own questions.",
+    steps: ["Show an image, object or chart connected to the new topic.", "SEE (3 min): students list only what they can observe. No interpretations yet.", "THINK (3 min): what do they think is going on? Ask 'What makes you say that?'", "WONDER (3 min): each student writes one question.", "Keep the questions visible and return to them at the end of the unit."],
+    materials: ["One rich image, object or chart", "Sticky notes"],
+    assessment: "Look at the questions: are they factual or do they open real inquiry?",
+    variation: "With younger pupils, do it orally and draw the questions."
+  },
+  {
+    id: "exit-ticket", title: "Three exit tickets that change tomorrow's lesson", pathway: "excellence", type: "Template", stages: ["All stages"], minutes: 5,
+    summary: "Three quick formats to know in two minutes what your class understood.",
+    objective: "Teachers collect evidence of learning at the end of a lesson and adapt the next one.",
+    steps: ["3-2-1: three things I learned, two questions I have, one thing I can apply.", "Traffic light: green 'I can explain it', amber 'nearly', red 'I need help', plus one sentence why.", "The muddiest point: what was the least clear part of today?", "Sort the tickets into three piles in two minutes.", "Start the next lesson with the most common doubt."],
+    materials: ["Half sheets of paper or a short online form"],
+    assessment: "The ticket is the assessment: count the reds and plan your opening.",
+    variation: "Rotate the three formats so students don't answer on autopilot."
+  },
+  {
+    id: "staff-wellbeing", title: "The 15-minute wellbeing check-in for staff", pathway: "wellbeing", type: "Routine", stages: ["All stages"], minutes: 15,
+    summary: "A short, safe routine to open staff meetings and reduce isolation.",
+    objective: "Teams create a habit of noticing workload and supporting each other.",
+    steps: ["Open with one question on a scale from 1 to 5: 'How full is your battery this week?'", "In threes, each person shares one thing that drained and one that recharged them (2 minutes each).", "Each trio agrees one small thing they can do for each other this week.", "Close with one sentence in the full group, voluntary.", "Repeat at the start of every meeting for a term."],
+    materials: ["Nothing; an optional anonymous form for the battery score"],
+    assessment: "Track the anonymous average battery score over the term.",
+    variation: "Do it with students as a Monday morning circle."
+  },
+  {
+    id: "calm-corner", title: "Build a calm corner with your class", pathway: "wellbeing", type: "Activity", stages: ["Early childhood", "Primary"], minutes: 45,
+    summary: "Students co-design a space and a routine to calm down before returning to work.",
+    objective: "Pupils learn to recognise emotions and choose a strategy to regulate them.",
+    steps: ["Read a short story about a strong emotion and talk about how the body feels.", "Brainstorm what helps them calm down: breathing, drawing, a soft object, counting.", "Choose three strategies together and make a visual card for each.", "Agree the rules: when to go, for how long (a sand timer), how to come back.", "Practise once with everyone so the corner is not a punishment."],
+    materials: ["Cushion or chair", "Sand timer", "Strategy cards"],
+    assessment: "After two weeks, ask the class what works and adjust the cards.",
+    variation: "In secondary, use a 'reset card' with breathing steps instead of a corner."
+  },
+  {
+    id: "udl-menu", title: "A learning menu for every student", pathway: "inclusion", type: "Lesson plan", stages: ["Primary", "Lower secondary", "Upper secondary"], minutes: 60,
+    summary: "Offer the same goal through three ways in: read, watch or do, and three ways out.",
+    objective: "All students reach the same learning goal through different paths (Universal Design for Learning).",
+    steps: ["Write one clear goal for the lesson and share it on the board.", "Prepare three inputs: a short text, a short video and a hands-on task with the same content.", "Students choose one input, then check with a peer who chose another.", "Offer three ways to show learning: explain orally, draw a diagram or write a paragraph.", "Use the same success criteria for all three outputs."],
+    materials: ["One text, one video, one hands-on task", "Success criteria card"],
+    assessment: "Same criteria, different formats: you assess the learning, not the format.",
+    variation: "Start with two options if the class is new to choice."
+  },
+  {
+    id: "strengths-cards", title: "Strengths cards", pathway: "inclusion", type: "Activity", stages: ["Primary", "Lower secondary"], minutes: 40,
+    summary: "Students discover and name each other's strengths to build a positive class identity.",
+    objective: "Students recognise their strengths and see differences as a resource for the group.",
+    steps: ["Show a set of strength words: curious, patient, creative, organised, kind, brave, funny, fair…", "Each student picks two strengths they see in themselves.", "In groups, each member gives one strength to every other member with an example.", "Students make a card with their four strengths and keep it on their desk.", "Use the cards when forming teams: 'We need someone organised and someone creative'."],
+    materials: ["Strength word list", "Card paper"],
+    assessment: "Observe whether students use the strength words when they work in teams.",
+    variation: "Add strengths in the languages spoken in your class."
+  },
+  {
+    id: "school-grounds", title: "Outdoor maths trail in the school grounds", pathway: "sustainability", type: "Activity", stages: ["Primary", "Lower secondary"], minutes: 50,
+    summary: "Take a maths lesson outside: measure, estimate and map real things around the school.",
+    objective: "Students apply measurement and estimation in a real context and connect with their environment.",
+    steps: ["Prepare 5 stations around the grounds: a tree, a path, a wall, a bench, a garden bed.", "At each station, teams estimate first, then measure (height, perimeter, area, angle).", "They record the difference between estimate and measurement.", "Back inside, they draw a simple map of the grounds with their data.", "Discuss: which space could we improve for nature or for play?"],
+    materials: ["Measuring tapes", "Clipboards", "Station cards"],
+    assessment: "Check how the estimates improve from station 1 to station 5.",
+    variation: "Use the same trail for science: count species at each station."
+  },
+  {
+    id: "waste-audit", title: "Classroom waste audit", pathway: "sustainability", type: "Lesson plan", stages: ["Primary", "Lower secondary", "Upper secondary"], minutes: 60,
+    summary: "Students measure the waste of their classroom for a week and propose a real change.",
+    objective: "Students collect data, analyse it and act on an environmental problem close to them.",
+    steps: ["For one week, keep separate bins: paper, plastic, organic, other.", "Each day, a team weighs or counts the waste and records it in a table.", "Make a chart and find the biggest category.", "Teams propose one action to reduce it and present it to the class.", "Vote one action, apply it for two weeks and measure again."],
+    materials: ["Bins or bags", "Kitchen scale", "Data table"],
+    assessment: "Compare the data before and after the action.",
+    variation: "Share the results with a partner school through eTwinning."
+  },
+  {
+    id: "europe-map", title: "Our class on the map of Europe", pathway: "citizenship", type: "Activity", stages: ["Primary", "Lower secondary"], minutes: 45,
+    summary: "Students trace the European connections of their own lives: food, family, music, travel, products.",
+    objective: "Students discover that Europe is part of their daily life and reflect on shared values.",
+    steps: ["Each student finds three European connections at home: a product, a song, a relative, a trip.", "Pin them on a large map of Europe with a short label.", "In groups, look for patterns: which countries appear most? Why?", "Read together one article of the EU Charter of Fundamental Rights and connect it to the class.", "Write a class postcard to a school in another country."],
+    materials: ["Large map of Europe", "Pins or stickers", "Postcard"],
+    assessment: "Ask each student to explain one connection and one shared value.",
+    variation: "Send the postcard through an eTwinning project and wait for the reply."
+  },
+  {
+    id: "change-canvas", title: "One-page change plan for school leaders", pathway: "leadership", type: "Template", stages: ["All stages"], minutes: 30,
+    summary: "A one-page template to plan a change in your school, from need to evidence.",
+    objective: "School leaders and coordinators plan a change that staff understand and can measure.",
+    steps: ["Need: what problem do we see and how do we know?", "Goal: what will be different in one year?", "People: who leads, who takes part, who needs to be convinced?", "Actions: three first steps with dates.", "Evidence: what will we look at to know it worked?", "Share the page with staff and ask for one improvement each."],
+    materials: ["The one-page template (print this resource)"],
+    assessment: "Review the page every term with the team.",
+    variation: "Use the same page to write the needs section of an Erasmus+ application."
+  },
+  {
+    id: "mobility-plan", title: "My Erasmus+ mobility plan", pathway: "leadership", type: "Template", stages: ["All stages"], minutes: 20,
+    summary: "A template to prepare a mobility: objectives, sharing plan and evidence of impact.",
+    objective: "Teachers arrive at their course with clear goals and come back with a plan to share.",
+    steps: ["My school's need this mobility answers.", "My two learning objectives (who, what, by when).", "The course or activity and why it fits.", "How I will share it: with whom, when and in what format.", "What I will try in class in the first month.", "How we will know it made a difference."],
+    materials: ["This template, printed or copied into your notes"],
+    assessment: "Compare the plan with what happened two months after the mobility.",
+    variation: "Coordinators can collect all plans to write the school's final report."
+  }
+];
+const resById = id => RESOURCES.find(r => r.id === id);
+
+/* ============================================================
+   EMOVE Profe · core: helpers, icons, state, shell and router
+   ============================================================ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+/* **bold** in content strings */
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+const todayISO = () => new Date().toISOString().slice(0, 10);
+const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+
+/* ---------- icons (stroke 1.8) ---------- */
+const IC = {
+  home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5h4v5"/>',
+  academy: '<path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6 11.5V16c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5"/><path d="M22 9.5V15"/>',
+  book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M8 7h7"/>',
+  open: '<path d="M2 5c3-1 6-1 10 1 4-2 7-2 10-1v14c-3-1-6-1-10 1-4-2-7-2-10-1z"/><path d="M12 6v14"/>',
+  plane: '<path d="M21 15.5 13.5 11V5a1.5 1.5 0 0 0-3 0v6L3 15.5V17l7.5-2.2V19L8 20.5V22l4-1 4 1v-1.5L13.5 19v-4.2L21 17z"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  shield: '<path d="M12 3 4.5 6v6c0 4.5 3.2 7.8 7.5 9 4.3-1.2 7.5-4.5 7.5-9V6z"/><path d="m9 12 2 2 4-4"/>',
+  stars: '<circle cx="12" cy="12" r="9"/><path d="m12 7.5 1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+  wallet: '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M16 14.5h2"/><path d="M6 6V5a2 2 0 0 1 2-2h9"/>',
+  route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h8"/>',
+  heart: '<path d="M12 20s-7.5-4.5-7.5-10A4.3 4.3 0 0 1 12 7.5 4.3 4.3 0 0 1 19.5 10C19.5 15.5 12 20 12 20z"/>',
+  leaf: '<path d="M5 19c0-9 5-14 15-14 0 10-5 15-14 15"/><path d="M5 19 13 11"/>',
+  hands: '<circle cx="8" cy="6" r="2.5"/><circle cx="16" cy="6" r="2.5"/><path d="M3.5 20c0-4 2-7 4.5-7s3.5 1.5 4 3c.5-1.5 1.5-3 4-3s4.5 3 4.5 7"/>',
+  spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  teacher: '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/><path d="m7 12 3-3 2 2 4-4"/>',
+  school: '<path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-5h4v5"/><path d="M12 5V2.5h3"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  print: '<path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  back: '<path d="M15 5 8 12l7 7"/>',
+  external: '<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  logout: '<path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l-4 4 4 4M6 12h10"/>',
+  note: '<path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h5"/>',
+  cert: '<rect x="3" y="4" width="18" height="13" rx="1.5"/><circle cx="16" cy="15" r="3"/><path d="M14.5 17.5 14 21l2-1 2 1-.5-3.5M7 8h8M7 11h5"/>',
+  quiz: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".6" fill="currentColor"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+  bookmark: '<path d="M6 3h12v18l-6-4-6 4z"/>',
+  users: '<circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c.8-3 3-5 6-5s5.2 2 6 5"/><path d="M15 14.5c2.5 0 4.5 1.5 5.5 4"/>',
+  download: '<path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/>',
+  calendar: '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  pin: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.5"/>'
+};
+const icon = (k, cls = "") => `<svg class="ic ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k] || ""}</svg>`;
+/* brand mark: EU-blue disc, ring of stars and the yellow forward arrow */
+const MARK_SVG = '<circle cx="32" cy="32" r="31" fill="#1965B8"/><polygon points="56.0,28.9 56.8,30.9 58.9,31.0 57.2,32.4 57.8,34.5 56.0,33.3 54.2,34.5 54.8,32.4 53.1,31.0 55.2,30.9" fill="#FFCA05"/><polygon points="52.8,40.9 53.5,42.9 55.7,43.0 54.0,44.4 54.6,46.5 52.8,45.3 51.0,46.5 51.5,44.4 49.8,43.0 52.0,42.9" fill="#FFCA05"/><polygon points="44.0,49.7 44.8,51.7 46.9,51.8 45.2,53.2 45.8,55.3 44.0,54.1 42.2,55.3 42.8,53.2 41.1,51.8 43.2,51.7" fill="#FFCA05"/><polygon points="32.0,52.9 32.8,54.9 34.9,55.0 33.2,56.4 33.8,58.5 32.0,57.3 30.2,58.5 30.8,56.4 29.1,55.0 31.2,54.9" fill="#FFCA05"/><polygon points="20.0,49.7 20.8,51.7 22.9,51.8 21.2,53.2 21.8,55.3 20.0,54.1 18.2,55.3 18.8,53.2 17.1,51.8 19.2,51.7" fill="#FFCA05"/><polygon points="11.2,40.9 12.0,42.9 14.2,43.0 12.5,44.4 13.0,46.5 11.2,45.3 9.4,46.5 10.0,44.4 8.3,43.0 10.5,42.9" fill="#FFCA05"/><polygon points="8.0,28.9 8.8,30.9 10.9,31.0 9.2,32.4 9.8,34.5 8.0,33.3 6.2,34.5 6.8,32.4 5.1,31.0 7.2,30.9" fill="#FFCA05"/><polygon points="11.2,16.9 12.0,18.9 14.2,19.0 12.5,20.4 13.0,22.5 11.2,21.3 9.4,22.5 10.0,20.4 8.3,19.0 10.5,18.9" fill="#FFCA05"/><polygon points="20.0,8.1 20.8,10.2 22.9,10.3 21.2,11.6 21.8,13.7 20.0,12.5 18.2,13.7 18.8,11.6 17.1,10.3 19.2,10.2" fill="#FFCA05"/><polygon points="32.0,4.9 32.8,6.9 34.9,7.0 33.2,8.4 33.8,10.5 32.0,9.3 30.2,10.5 30.8,8.4 29.1,7.0 31.2,6.9" fill="#FFCA05"/><polygon points="44.0,8.1 44.8,10.2 46.9,10.3 45.2,11.6 45.8,13.7 44.0,12.5 42.2,13.7 42.8,11.6 41.1,10.3 43.2,10.2" fill="#FFCA05"/><polygon points="52.8,16.9 53.5,18.9 55.7,19.0 54.0,20.4 54.6,22.5 52.8,21.3 51.0,22.5 51.5,20.4 49.8,19.0 52.0,18.9" fill="#FFCA05"/><circle cx="32" cy="32" r="15.5" fill="#FFCA05"/><path d="M23.5 39.5c0-6.5 4-10.5 10.5-10.5h3" fill="none" stroke="#1965B8" stroke-width="5" stroke-linecap="round"/><path d="M35.5 21.5 45 29l-9.5 7.5z" fill="#1965B8" stroke="#1965B8" stroke-width="2" stroke-linejoin="round"/>';
+const MARK = (s = 34) => `<svg class="mark" width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true">${MARK_SVG}</svg>`;
+const LOGO = `<span class="logo">${MARK(34)}<span class="logo-t"><b>EMOVE</b> Profe</span></span>`;
+
+/* ---------- state (per device, synced to the account) ---------- */
+const KEY = "emove-profe-v1";
+const freshState = () => ({ xp: 0, done: {}, units: {}, notes: {}, favs: [], quiz: null, certs: [], clicks: {}, days: [], log: [] });
+let S = (() => { try { return Object.assign(freshState(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) { return freshState(); } })();
+let USER = null;      // signed-in account (from the server)
+function summary() {
+  const c = COURSES[0];
+  return { xp: S.xp, units: c.units.filter(u => S.units[u.id]).length, of: c.units.length, quiz: S.quiz, certs: S.certs.length, favs: S.favs.length, clicks: Object.keys(S.clicks).length, last: todayISO() };
+}
+function save(sync = true) {
+  S.summary = summary();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { }
+  if (sync && typeof syncPush === "function") syncPush();
+}
+function logAct(t) { S.log.unshift({ t, d: todayISO() }); S.log = S.log.slice(0, 40); }
+function addXP(n, why) {
+  S.xp += n;
+  if (!S.days.includes(todayISO())) S.days.push(todayISO());
+  if (why) logAct(why);
+  save();
+}
+const level = () => { const xp = S.xp; const lv = xp < 60 ? 1 : xp < 160 ? 2 : xp < 320 ? 3 : xp < 520 ? 4 : 5; return { lv, name: ["Explorer", "Planner", "Applicant", "Mobility pro", "Erasmus+ champion"][lv - 1], next: [60, 160, 320, 520, null][lv - 1] }; };
+
+/* ---------- UI helpers ---------- */
+function toast(msg) {
+  let t = $("#toast"); if (!t) { t = document.createElement("div"); t.id = "toast"; document.body.appendChild(t); }
+  t.textContent = msg; t.className = "show"; clearTimeout(t._h); t._h = setTimeout(() => t.className = "", 2600);
+}
+function sheet(html, cls = "") {
+  closeSheet();
+  const d = document.createElement("div"); d.className = "sheet-bg"; d.innerHTML = `<div class="sheet ${cls}" role="dialog" aria-modal="true"><button class="x" aria-label="Close">${icon("close")}</button>${html}</div>`;
+  d.addEventListener("click", e => { if (e.target === d || e.target.closest(".x")) closeSheet(); });
+  document.body.appendChild(d); return d.querySelector(".sheet");
+}
+function closeSheet() { $$(".sheet-bg").forEach(x => x.remove()); }
+const chip = (t, color) => `<span class="chip" ${color ? `style="--c:${color}"` : ""}>${esc(t)}</span>`;
+const ring = (p, s = 64, label = "") => { const r = (s - 8) / 2, c = 2 * Math.PI * r; return `<svg class="ring" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><circle cx="${s / 2}" cy="${s / 2}" r="${r}" class="ring-bg"/><circle cx="${s / 2}" cy="${s / 2}" r="${r}" class="ring-fg" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - p)}" transform="rotate(-90 ${s / 2} ${s / 2})"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle">${label}</text></svg>`; };
+
+/* course recommendation: courses of the pathway, or the offer for schools */
+function courseCTA(pid, why) {
+  const list = coursesFor(pid), p = pathwayById(pid);
+  const items = list.length ? list : [FOR_SCHOOLS];
+  return `<div class="cta-course" style="--c:${p.color}"><div class="cta-k">${icon("plane")} Go further with eMove · ${esc(p.name)}</div>${why ? `<p class="muted">${esc(why)}</p>` : ""}
+    ${items.map(c => `<a class="cta-item" href="${c.url}" target="_blank" rel="noopener" data-course="${esc(c.id || "schools")}"><div><b>${esc(c.title)}</b><span>${esc(c.sub)}</span>${c.city ? `<small>${icon("pin")} ${esc(c.city)} · ${esc(c.dates)} · ${esc(c.price)} · Erasmus+ compatible</small>` : ""}</div>${icon("external")}</a>`).join("")}</div>`;
+}
+/* interest in courses is recorded so the super-admin can see who to contact */
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-course]"); if (!a) return;
+  S.clicks[a.dataset.course] = todayISO(); logAct("Opened eMove course: " + (courseById(a.dataset.course) || FOR_SCHOOLS).title); save();
+});
+
+/* ---------- shell and router ---------- */
+const NAV = [["home", "Home", "home"], ["academy", "Academy", "academy"], ["resources", "Resources", "book"], ["courses", "eMove courses", "plane"], ["profile", "Profile", "user"]];
+function shell() {
+  document.body.innerHTML = `<header class="top"><a href="#home" class="brand" aria-label="EMOVE Profe home">${LOGO}</a>
+    <nav class="nav">${NAV.map(([k, t, i]) => `<a href="#${k}" data-nav="${k}">${icon(i)}<span>${t}</span></a>`).join("")}${USER && USER.admin ? `<a href="#admin" data-nav="admin">${icon("shield")}<span>Admin</span><em id="pend"></em></a>` : ""}</nav></header>
+    <main id="view"></main>
+    <footer class="foot"><span>EMOVE Profe · free training for European teachers by <a href="${EMOVE_SITE}" target="_blank" rel="noopener">eMove Academy</a></span><span>Born in Spain. Built for Europe.</span></footer>`;
+}
+const ROUTES = {};
+function route() {
+  const h = (location.hash || "#home").slice(1).split("/");
+  const fn = ROUTES[h[0]] || ROUTES.home;
+  $$("[data-nav]").forEach(a => a.classList.toggle("on", a.dataset.nav === (h[0] === "unit" || h[0] === "lesson" || h[0] === "quiz" || h[0] === "glossary" ? "academy" : h[0] === "res" ? "resources" : h[0])));
+  const v = $("#view"); v.innerHTML = ""; v.className = "view v-" + h[0];
+  fn(v, h.slice(1));
+  window.scrollTo(0, 0);
+}
+const go = h => { if (location.hash === "#" + h) route(); else location.hash = h; };
+window.addEventListener("hashchange", () => { closeSheet(); if (USER) route(); });
+
+function start() {
+  accountsBoot(() => { shell(); route(); });
+}
+
+/* ============ ACCOUNTS: request access, super-admin approval, sign in and sync ============
+   On the published site every teacher requests access and can only enter once the super-admin approves it.
+   Opened as a local file, or on a host without the API, the app runs in preview mode with no accounts. */
+const AUTH_KEY = "emove-profe-auth";
+let AUTH = (() => { try { return JSON.parse(localStorage.getItem(AUTH_KEY)) || null; } catch (e) { return null; } })();
+let PREVIEW = false;
+let REV = 0;
+function authSave(a) { AUTH = a; try { a ? localStorage.setItem(AUTH_KEY, JSON.stringify(a)) : localStorage.removeItem(AUTH_KEY); } catch (e) { } }
+async function api(path, body, method) {
+  const headers = { "content-type": "application/json" };
+  if (AUTH && AUTH.token) headers.authorization = "Bearer " + AUTH.token;
+  let r;
+  try { r = await fetch("/api/" + path, { method: method || (body ? "POST" : "GET"), headers, body: body ? JSON.stringify(body) : undefined }); }
+  catch (e) { return { net: true, ok: false, status: 0, data: { message: "No connection. Check your internet and try again." } }; }
+  let data = {}; try { data = await r.json(); } catch (e) { data = { message: "The server is not answering. Please try again in a moment." }; }
+  return { ok: r.ok, status: r.status, data };
+}
+/* progress is kept per device: if another account signs in, the previous one is set aside */
+function adoptUser(u) {
+  if (S.owner && S.owner !== u.email) {
+    try { localStorage.setItem(KEY + ":" + S.owner, JSON.stringify(S)); const raw = localStorage.getItem(KEY + ":" + u.email); S = raw ? Object.assign(freshState(), JSON.parse(raw)) : freshState(); }
+    catch (e) { S = freshState(); }
+    REV = 0;
+  }
+  S.owner = u.email; USER = u;
+  try { REV = +localStorage.getItem(KEY + ":rev:" + u.email) || 0; } catch (e) { }
+  save(false);
+}
+async function accountsBoot(next) {
+  const online = /^https?:$/.test(location.protocol);
+  const ping = online ? await api("ping") : { ok: false };
+  if (!ping.ok && !(ping.net && AUTH)) {
+    PREVIEW = true; USER = { name: "Preview", email: "preview", admin: false, preview: true }; S.owner = S.owner || "preview";
+    next(); toast("Preview mode: accounts are switched off on this copy.");
+    return;
+  }
+  if (AUTH && AUTH.token && AUTH.user) {
+    adoptUser(AUTH.user); next();
+    const r = await api("me");
+    if (r.net) return; // offline: keep the saved account
+    if (r.ok) { const wasAdmin = !!USER.admin; AUTH.user = r.data.user; authSave(AUTH); adoptUser(r.data.user); if (wasAdmin !== !!USER.admin) { shell(); route(); } adminPoll(); syncPull(); return; }
+    if (r.status === 401 || r.status === 403) { authSave(null); USER = null; authScreen(next, r.status === 403 ? r.data.status : "expired"); }
+    return;
+  }
+  authScreen(next);
+}
+function signOut() { authSave(null); USER = null; location.hash = ""; authScreen(() => { shell(); route(); }); }
+
+/* ---------- sign in / request access ---------- */
+const SELL = [
+  ["academy", "Erasmus+ from scratch", "A free interactive microcourse: routes, money, planning and impact."],
+  ["book", "Classroom resources", "Ready-to-use activities, routines and templates for every stage."],
+  ["plane", "Courses abroad", "Discover eMove courses you can fund with an Erasmus+ grant."],
+  ["cert", "Certificate", "Finish the microcourse and download your certificate of completion."]
+];
+function authScreen(next, notice) {
+  document.body.innerHTML = `<div class="auth"><section class="auth-side">
+      <a href="/" class="brand">${LOGO}</a>
+      <h1>Free Erasmus+ training and classroom resources for European teachers.</h1>
+      <ul class="sell">${SELL.map(([i, t, d]) => `<li>${icon(i)}<div><b>${t}</b><span>${d}</span></div></li>`).join("")}</ul>
+      <p class="small">By <a href="${EMOVE_SITE}" target="_blank" rel="noopener">eMove Academy</a> · A European Teacher Academy</p>
+    </section>
+    <section class="auth-main"><div class="card auth-card" id="authCard"></div></section></div>`;
+  const card = $("#authCard");
+  const tabs = mode => `<div class="tabs"><button data-m="in" class="${mode === "in" ? "on" : ""}">Sign in</button><button data-m="up" class="${mode === "up" ? "on" : ""}">Request access</button></div>`;
+  const NOTICE = {
+    pending: ["Your request is waiting for approval", "The eMove team reviews every request. Try signing in again once it has been approved."],
+    rejected: ["Your request was not approved", `If you think this is a mistake, write to ${EMOVE_MAIL}.`],
+    expired: ["Your session has ended", "Please sign in again."]
+  };
+  const noteHTML = n => NOTICE[n] ? `<div class="notice ${n}"><b>${NOTICE[n][0]}</b><span>${esc(NOTICE[n][1])}</span></div>` : "";
+  const signIn = (n) => {
+    card.innerHTML = tabs("in") + noteHTML(n) + `<form id="f" class="form" novalidate>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="err" id="err"></p>
+      <button class="btn primary wide">Sign in</button>
+      <p class="small center">Forgot your password? Write to <a href="mailto:${EMOVE_MAIL}">${EMOVE_MAIL}</a> and we will reset it.</p></form>`;
+    bindTabs();
+    $("#f").onsubmit = async e => {
+      e.preventDefault(); const f = new FormData(e.target), b = $("button.primary", card); b.disabled = true; $("#err").textContent = "";
+      const r = await api("login", { email: f.get("email"), password: f.get("password") }); b.disabled = false;
+      if (r.ok) { authSave({ token: r.data.token, user: r.data.user }); adoptUser(r.data.user); await syncPull(); next(); adminPoll(); return; }
+      if (r.status === 403) return signIn(r.data.status);
+      $("#err").textContent = r.data.message || "Something went wrong.";
+    };
+  };
+  const requestAccess = () => {
+    card.innerHTML = tabs("up") + `<p class="muted">Access is free. Tell us a little about you; the eMove team approves every account.</p>
+      <form id="f" class="form" novalidate>
+      <label>Full name<input name="name" autocomplete="name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <div class="two"><label>School or organisation<input name="school" required></label>
+      <label>Country<select name="country" required><option value="">Choose…</option>${COUNTRIES.map(c => `<option>${c}</option>`).join("")}</select></label></div>
+      <div class="two"><label>Your role<select name="role">${ROLES.map(([k, t]) => `<option value="${k}">${t}</option>`).join("")}</select></label>
+      <label>Stage you teach<select name="stage"><option value="">Choose…</option>${STAGES.map(s => `<option>${s}</option>`).join("")}</select></label></div>
+      <label><span>Subject or area <span class="optional">optional</span></span><input name="subject"></label>
+      <fieldset><legend>What interests you most? <span class="optional">optional</span></legend><div class="checks">${PATHWAYS.map(p => `<label class="check"><input type="checkbox" name="interests" value="${p.id}"><span>${p.name}</span></label>`).join("")}</div></fieldset>
+      <label>Password<input name="password" type="password" minlength="8" autocomplete="new-password" required><small>At least 8 characters.</small></label>
+      <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+      <label class="check"><input type="checkbox" name="accept" required><span>I accept the <a href="/privacy/" target="_blank">privacy notice</a>: eMove Academy uses my details to manage my access.</span></label>
+      <label class="check"><input type="checkbox" name="news"><span>I would like to receive news about Erasmus+ deadlines and eMove courses.</span></label>
+      <p class="err" id="err"></p>
+      <button class="btn primary wide">Request access</button></form>`;
+    bindTabs();
+    $("#f").onsubmit = async e => {
+      e.preventDefault(); const f = new FormData(e.target), b = $("button.primary", card); b.disabled = true; $("#err").textContent = "";
+      const body = Object.fromEntries(["name", "email", "school", "country", "role", "stage", "subject", "password", "website"].map(k => [k, f.get(k) || ""]));
+      Object.assign(body, { interests: f.getAll("interests"), accept: !!f.get("accept"), news: !!f.get("news") });
+      const r = await api("register", body); b.disabled = false;
+      if (!r.ok) { $("#err").textContent = r.data.message || "Something went wrong."; return; }
+      if (r.data.status === "approved") { const l = await api("login", { email: body.email, password: body.password }); if (l.ok) { authSave({ token: l.data.token, user: l.data.user }); adoptUser(l.data.user); next(); adminPoll(); return; } }
+      card.innerHTML = `<div class="done-box">${icon("check", "big ok")}<h2>Thank you, ${esc(body.name.split(" ")[0])}!</h2>
+        <p>Your request is with the eMove team. As soon as it is approved you can sign in with your email and password.</p>
+        <p class="muted small">Meanwhile, read our free <a href="/guides/">Erasmus+ guides</a>.</p>
+        <button class="btn" id="toIn">Back to sign in</button></div>`;
+      $("#toIn").onclick = () => signIn();
+    };
+  };
+  function bindTabs() { $$(".tabs button", card).forEach(b => b.onclick = () => b.dataset.m === "in" ? signIn() : requestAccess()); }
+  location.hash.includes("request") ? requestAccess() : signIn(notice);
+}
+
+/* ---------- sync between devices ---------- */
+function mergeState(a, b) {
+  if (!b) return a;
+  const m = Object.assign(freshState(), a);
+  m.xp = Math.max(a.xp || 0, b.xp || 0);
+  for (const k of ["done", "units", "clicks"]) m[k] = Object.assign({}, b[k] || {}, a[k] || {});
+  m.notes = Object.assign({}, b.notes || {}); for (const [k, v] of Object.entries(a.notes || {})) if (v) m.notes[k] = v;
+  m.favs = [...new Set([...(a.favs || []), ...(b.favs || [])])];
+  m.days = [...new Set([...(a.days || []), ...(b.days || [])])].sort();
+  m.quiz = [a.quiz, b.quiz].filter(Boolean).sort((x, y) => y.score - x.score)[0] || null;
+  const certs = {}; for (const c of [...(b.certs || []), ...(a.certs || [])]) certs[c.id] = c; m.certs = Object.values(certs);
+  const seen = new Set(); m.log = [...(a.log || []), ...(b.log || [])].filter(x => { const k = x.t + x.d; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 40);
+  return m;
+}
+function setRev(r) { REV = r; try { localStorage.setItem(KEY + ":rev:" + S.owner, String(r)); } catch (e) { } }
+async function syncPull() {
+  if (PREVIEW || !AUTH) return;
+  const r = await api("data"); if (!r.ok) return;
+  if (r.data.state) { const owner = S.owner; S = mergeState(S, r.data.state); S.owner = owner; save(false); }
+  setRev(r.data.rev || 0);
+  if (!r.data.state || JSON.stringify(r.data.state) !== JSON.stringify(S)) syncPush(true);
+  if ($("#view")) route();
+}
+let syncT = null;
+function syncPush(now) {
+  if (PREVIEW || !AUTH) return;
+  clearTimeout(syncT);
+  syncT = setTimeout(async () => {
+    const r = await api("data", { base: REV, state: S }, "PUT");
+    if (r.ok) return setRev(r.data.rev);
+    if (r.status === 409) { const owner = S.owner; S = mergeState(S, r.data.state); S.owner = owner; save(false); setRev(r.data.rev); const r2 = await api("data", { base: REV, state: S }, "PUT"); if (r2.ok) setRev(r2.data.rev); }
+  }, now ? 0 : 1500);
+}
+
+/* ---------- super-admin ---------- */
+async function adminPoll() {
+  if (!USER || !USER.admin) return;
+  const r = await api("admin/users"); if (!r.ok) return;
+  const n = r.data.users.filter(u => u.status === "pending").length;
+  const el = $("#pend"); if (el) el.textContent = n ? n : "";
+}
+const ROLE_NAME = Object.fromEntries(ROLES);
+const fmtDate = s => s ? new Date(s).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "–";
+ROUTES.admin = async (v) => {
+  if (!USER.admin) return go("home");
+  v.innerHTML = `<div class="page-h"><h1>${icon("shield")} Super-admin</h1><p class="muted">Approve teachers, see their progress and export contacts.</p></div><div id="adm"><p class="muted">Loading…</p></div>`;
+  const r = await api("admin/users");
+  if (!r.ok) { $("#adm").innerHTML = `<p class="err">${esc(r.data.message || "Could not load users.")}</p>`; return; }
+  let users = r.data.users, tab = users.some(u => u.status === "pending") ? "pending" : "approved", q = "";
+  const draw = () => {
+    const count = s => users.filter(u => s === "all" || u.status === s).length;
+    const list = users.filter(u => (tab === "all" || u.status === tab) && (!q || JSON.stringify(u).toLowerCase().includes(q)));
+    $("#adm").innerHTML = `<div class="stats">
+        <div class="stat"><b>${users.length}</b><span>accounts</span></div>
+        <div class="stat"><b>${count("pending")}</b><span>waiting for approval</span></div>
+        <div class="stat"><b>${users.filter(u => u.progress && u.progress.units).length}</b><span>started the microcourse</span></div>
+        <div class="stat"><b>${users.filter(u => u.progress && u.progress.clicks).length}</b><span>opened an eMove course</span></div>
+        <div class="stat"><b>${users.filter(u => u.news).length}</b><span>accept news</span></div></div>
+      <div class="adm-bar"><div class="tabs">${[["pending", "Pending"], ["approved", "Approved"], ["rejected", "Rejected"], ["all", "All"]].map(([k, t]) => `<button data-t="${k}" class="${tab === k ? "on" : ""}">${t} <em>${count(k)}</em></button>`).join("")}</div>
+      <label class="search">${icon("search")}<input id="q" placeholder="Search name, school, country…" value="${esc(q)}"></label>
+      <button class="btn" id="csv">${icon("download")} Export CSV</button></div>
+      <div class="users">${list.length ? list.map(u => `<article class="card user ${u.status}" data-e="${esc(u.email)}">
+        <div class="user-h"><div><b>${esc(u.name)}</b> ${u.admin ? chip("super-admin", "#101C38") : ""}<span class="muted">${esc(u.email)}</span></div><span class="status ${u.status}">${u.status}</span></div>
+        <dl><div><dt>School</dt><dd>${esc(u.school)}</dd></div><div><dt>Country</dt><dd>${esc(u.country)}</dd></div><div><dt>Role</dt><dd>${esc(ROLE_NAME[u.role] || u.role)}</dd></div><div><dt>Stage</dt><dd>${esc(u.stage || "–")}${u.subject ? " · " + esc(u.subject) : ""}</dd></div>
+        <div><dt>Interests</dt><dd>${(u.interests || []).map(i => esc(pathwayById(i).name)).join(", ") || "–"}</dd></div><div><dt>News</dt><dd>${u.news ? "Yes" : "No"}</dd></div>
+        <div><dt>Requested</dt><dd>${fmtDate(u.created)}</dd></div><div><dt>Last sign-in</dt><dd>${fmtDate(u.lastLogin)}</dd></div>
+        <div><dt>Progress</dt><dd>${u.progress ? `${u.progress.units}/${u.progress.of} units · ${u.progress.xp} XP${u.progress.quiz ? ` · quiz ${u.progress.quiz.score}/${u.progress.quiz.of}` : ""}${u.progress.clicks ? ` · opened ${u.progress.clicks} eMove course${u.progress.clicks > 1 ? "s" : ""}` : ""}` : "Not started"}</dd></div></dl>
+        <div class="row gap">${u.status !== "approved" ? `<button class="btn primary sm" data-a="approve">${icon("check")} Approve</button>` : ""}${u.status !== "rejected" && !u.admin ? `<button class="btn sm" data-a="reject">Reject</button>` : ""}
+        ${u.status === "approved" ? `<button class="btn sm" data-a="reset">Reset password</button>` : ""}${!u.admin ? `<button class="btn sm danger" data-a="delete">Delete</button>` : ""}</div></article>`).join("") : `<p class="muted empty">No accounts here.</p>`}</div>`;
+    $$("[data-t]").forEach(b => b.onclick = () => { tab = b.dataset.t; draw(); });
+    const qi = $("#q"); qi.oninput = () => { q = qi.value.toLowerCase(); const pos = qi.selectionStart; draw(); const n = $("#q"); n.focus(); n.setSelectionRange(pos, pos); };
+    $("#csv").onclick = () => exportCSV(list);
+    $$("[data-a]").forEach(b => b.onclick = async () => {
+      const email = b.closest("[data-e]").dataset.e, a = b.dataset.a;
+      if (a === "delete" && !confirm(`Delete ${email} and all their progress? This cannot be undone.`)) return;
+      if (a === "reset" && !confirm(`Create a temporary password for ${email}?`)) return;
+      b.disabled = true;
+      const r = await api("admin/user", { email, action: a });
+      if (!r.ok) { toast(r.data.message || "Could not do that."); b.disabled = false; return; }
+      if (a === "delete") users = users.filter(u => u.email !== email);
+      else users = users.map(u => u.email === email ? Object.assign(u, r.data.user) : u);
+      if (a === "reset") sheet(`<h2>Temporary password</h2><p>Send this password to <b>${esc(email)}</b>. They can change it in their profile.</p><p class="temp">${esc(r.data.temp)}</p>`);
+      else toast(a === "approve" ? "Approved. Let them know they can sign in." : a === "reject" ? "Request rejected." : "Deleted.");
+      draw(); adminPoll();
+    });
+  };
+  draw();
+};
+function exportCSV(list) {
+  const cols = [["name", "Name"], ["email", "Email"], ["school", "School"], ["country", "Country"], ["role", "Role"], ["stage", "Stage"], ["subject", "Subject"], ["interests", "Interests"], ["news", "Accepts news"], ["status", "Status"], ["created", "Requested"], ["units", "Units done"], ["quiz", "Quiz"], ["courses", "eMove courses opened"]];
+  const val = (u, k) => k === "interests" ? (u.interests || []).map(i => pathwayById(i).name).join("; ") : k === "news" ? (u.news ? "yes" : "no") : k === "role" ? ROLE_NAME[u.role] || u.role
+    : k === "units" ? (u.progress ? u.progress.units : 0) : k === "quiz" ? (u.progress && u.progress.quiz ? `${u.progress.quiz.score}/${u.progress.quiz.of}` : "") : k === "courses" ? (u.progress ? u.progress.clicks : 0) : u[k] || "";
+  const cell = x => `"${String(x).replace(/"/g, '""')}"`;
+  const csv = [cols.map(c => cell(c[1])).join(","), ...list.map(u => cols.map(([k]) => cell(val(u, k))).join(","))].join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv" })); a.download = `emove-profe-teachers-${todayISO()}.csv`; a.click();
+}
+
+/* ============ ACADEMY: course map, lesson player, activities, quiz, certificate, glossary ============ */
+const COURSE = () => COURSES[0];
+const unitById = id => COURSE().units.find(u => u.id === id);
+const actId = (u, i) => `${u.id}-${i}`;
+const unitProgress = u => u.activities.filter((_, i) => S.done[actId(u, i)]).length / u.activities.length;
+const unitOpen = (u) => { const us = COURSE().units, i = us.indexOf(u); return i === 0 || !!S.units[us[i - 1].id] || unitProgress(u) > 0; };
+const allUnitsDone = () => COURSE().units.every(u => S.units[u.id]);
+const courseProgress = () => { const us = COURSE().units; return (us.filter(u => S.units[u.id]).length + (S.quiz && S.quiz.pass ? 1 : 0)) / (us.length + 1); };
+const nextUnit = () => COURSE().units.find(u => !S.units[u.id]);
+const pickCourse = () => {
+  const ints = (USER && USER.interests) || [];
+  return EMOVE_COURSES.find(c => ints.includes(c.pathway)) || EMOVE_COURSES[(new Date().getDate()) % EMOVE_COURSES.length];
+};
+
+ROUTES.academy = v => {
+  const c = COURSE(), p = courseProgress(), nu = nextUnit();
+  v.innerHTML = `<section class="course-hero"><div><span class="eyebrow">${icon("academy")} Microcourse 1 · Free</span><h1>${esc(c.title)}</h1><p>${esc(c.sub)}</p>
+      <div class="meta">${icon("clock")} About ${c.minutes} minutes · ${c.units.length} units · final quiz · certificate</div>
+      <div class="row gap">${nu ? `<a class="btn primary" href="#unit/${nu.id}">${p ? "Continue" : "Start the course"} ${icon("arrow")}</a>` : allUnitsDone() && !(S.quiz && S.quiz.pass) ? `<a class="btn primary" href="#quiz">Take the final quiz ${icon("arrow")}</a>` : `<a class="btn primary" href="#cert/${c.id}">${icon("cert")} View your certificate</a>`}<a class="btn" href="#glossary">${icon("open")} Glossary</a></div></div>
+      <div class="hero-ring">${ring(p, 132, Math.round(p * 100) + "%")}<span>completed</span></div></section>
+    <ol class="path">${c.units.map((u, i) => {
+      const done = !!S.units[u.id], open = unitOpen(u), pr = unitProgress(u);
+      return `<li class="node ${done ? "done" : open ? "open" : "locked"}"><a ${open ? `href="#unit/${u.id}"` : ""} class="node-a"><span class="node-dot">${done ? icon("check") : open ? icon(u.icon) : icon("lock")}</span>
+        <div class="node-b"><span class="eyebrow">Unit ${i + 1}</span><b>${esc(u.title)}</b><span class="muted">${esc(u.goal)}</span>${open && !done && pr ? `<div class="bar"><i style="width:${pr * 100}%"></i></div>` : ""}</div>
+        <span class="node-n">${u.activities.length} activities</span></a></li>`;
+    }).join("")}
+      <li class="node ${S.quiz && S.quiz.pass ? "done" : allUnitsDone() ? "open" : "locked"}"><a ${allUnitsDone() ? `href="#quiz"` : ""} class="node-a"><span class="node-dot">${S.quiz && S.quiz.pass ? icon("check") : allUnitsDone() ? icon("quiz") : icon("lock")}</span>
+        <div class="node-b"><span class="eyebrow">Final</span><b>Quiz and certificate</b><span class="muted">${c.quiz.length} questions. Get ${passMark()} right to earn your certificate.</span></div></a></li></ol>
+    <h2 class="sec-t">Coming next</h2>
+    <div class="grid3">${[["Write your KA122 application", "A guided walk through every section of the form, with examples."], ["Make your mobility count", "Dissemination and impact ideas that evaluators love."], ["eTwinning in practice", "Start a project with a partner school in a week."]].map(([t, d]) => `<div class="card soon"><span class="chip">Coming soon</span><b>${t}</b><p class="muted">${d}</p></div>`).join("")}</div>
+    <p class="disclaimer">Summarised from the Erasmus+ Programme Guide. Rules, amounts and deadlines change every year: always check the current guide and your National Agency.</p>`;
+};
+
+ROUTES.unit = (v, [id]) => {
+  const u = unitById(id); if (!u) return go("academy");
+  if (!unitOpen(u)) { toast("Finish the previous unit first."); return go("academy"); }
+  const idx = COURSE().units.indexOf(u), first = u.activities.findIndex((_, i) => !S.done[actId(u, i)]);
+  const KIND = { learn: ["Learn", "open"], cards: ["Discover", "eye"], choice: ["Decide", "target"], tf: ["True or false", "quiz"], sort: ["Sort", "route"], order: ["Order", "route"], reflect: ["Reflect", "note"] };
+  v.innerHTML = `<a class="back" href="#academy">${icon("back")} Course map</a>
+    <section class="unit-h"><span class="node-dot big">${icon(u.icon)}</span><div><span class="eyebrow">Unit ${idx + 1} of ${COURSE().units.length}</span><h1>${esc(u.title)}</h1><p class="muted">${esc(u.goal)}</p></div></section>
+    <ol class="acts">${u.activities.map((a, i) => { const d = S.done[actId(u, i)], k = KIND[a.type]; return `<li><a href="#lesson/${u.id}/${i}" class="act-row ${d ? "done" : ""}"><span class="act-i">${d ? icon("check") : icon(k[1])}</span><div><span class="eyebrow">${k[0]}</span><b>${esc(a.title || a.q)}</b></div>${icon("arrow")}</a></li>`; }).join("")}</ol>
+    <div class="row gap"><a class="btn primary" href="#lesson/${u.id}/${first < 0 ? 0 : first}">${first < 0 ? "Review the unit" : first ? "Continue" : "Start"} ${icon("arrow")}</a></div>`;
+};
+
+/* ---------- lesson player ---------- */
+ROUTES.lesson = (v, [uid, n]) => {
+  const u = unitById(uid); if (!u || !unitOpen(u)) return go("academy");
+  const i = Math.max(0, Math.min(+n || 0, u.activities.length - 1)), a = u.activities[i], id = actId(u, i);
+  v.innerHTML = `<div class="player"><div class="player-top"><a href="#unit/${u.id}" class="icon-btn" aria-label="Close lesson">${icon("close")}</a>
+      <div class="steps">${u.activities.map((_, k) => `<i class="${k < i || S.done[actId(u, k)] ? "done" : ""} ${k === i ? "now" : ""}"></i>`).join("")}</div><span class="xp-pill">${icon("bolt")} ${S.xp} XP</span></div>
+    <div class="act card" id="act"></div><div class="player-foot" id="foot"></div></div>`;
+  const host = $("#act"), foot = $("#foot");
+  /* ok: true/false for graded activities, null for the rest; auto: move on straight away (nothing to read after) */
+  const finish = (ok, auto) => {
+    const first = !S.done[id];
+    S.done[id] = { ok: ok !== false, d: todayISO() };
+    if (first) addXP(ok === true ? 15 : 10, null); else save();
+    $(".xp-pill").innerHTML = `${icon("bolt")} ${S.xp} XP`;
+    const last = i === u.activities.length - 1, advance = () => last ? unitDone(u) : go(`lesson/${u.id}/${i + 1}`);
+    if (auto) return advance();
+    foot.innerHTML = `<button class="btn primary wide" id="next">${last ? "Finish unit" : "Continue"} ${icon("arrow")}</button>`;
+    $("#next").onclick = advance;
+    const fb = $("#fb", host) || $(".tf li:last-child .tf-fb", host);
+    if (fb) setTimeout(() => fb.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
+  };
+  (ACT[a.type] || ACT.learn)(host, a, foot, finish, id);
+};
+function unitDone(u) {
+  const firstTime = !S.units[u.id];
+  if (firstTime) { S.units[u.id] = todayISO(); addXP(30, `Unit completed: ${u.title}`); }
+  const c = pickCourse(), us = COURSE().units, nx = us[us.indexOf(u) + 1];
+  $("#view").innerHTML = `<div class="celebrate card"><div class="medal">${icon(u.icon)}</div><h1>Unit complete!</h1><p>${esc(u.title)}${firstTime ? " · +30 XP bonus" : ""}</p>
+    <div class="row gap center">${nx ? `<a class="btn primary" href="#unit/${nx.id}">Next: ${esc(nx.title)} ${icon("arrow")}</a>` : `<a class="btn primary" href="#quiz">Take the final quiz ${icon("arrow")}</a>`}<a class="btn" href="#academy">Course map</a></div></div>
+    <div class="card tip-course"><p><b>Did you know?</b> eMove courses are Erasmus+ compatible: what you are learning here is exactly how a school funds one.</p>${courseCTA(c.pathway)}</div>`;
+  window.scrollTo(0, 0);
+}
+
+/* ---------- activity types ---------- */
+const ACT = {};
+const feedback = (ok, html) => `<div class="fb ${ok ? "ok" : "no"}">${icon(ok ? "check" : "close")}<div>${html}</div></div>`;
+ACT.learn = (h, a, foot, finish) => {
+  h.innerHTML = `<span class="eyebrow">${icon("open")} Learn</span><h2>${esc(a.title)}</h2><p class="lead">${md(a.body)}</p>
+    ${a.points ? `<ul class="points">${a.points.map(p => `<li>${icon("check")}<span>${md(p)}</span></li>`).join("")}</ul>` : ""}${a.tip ? `<div class="tip">${icon("spark")}<p>${md(a.tip)}</p></div>` : ""}`;
+  foot.innerHTML = `<button class="btn primary wide">Got it ${icon("arrow")}</button>`; foot.firstChild.onclick = () => finish(null, true);
+};
+ACT.cards = (h, a, foot, finish) => {
+  const seen = new Set();
+  h.innerHTML = `<span class="eyebrow">${icon("eye")} Discover</span><h2>${esc(a.title)}</h2><p class="muted">${md(a.intro || "Tap each card.")}</p>
+    <div class="flip-grid">${a.cards.map((c, k) => `<button class="flip" data-k="${k}"><span class="flip-i">${icon(c.icon || "star")}</span><b>${esc(c.t)}</b><span class="flip-d">${md(c.d)}</span><span class="flip-hint">Tap to discover</span></button>`).join("")}</div>`;
+  foot.innerHTML = `<button class="btn primary wide" disabled>Open all the cards (0/${a.cards.length})</button>`;
+  $$(".flip", h).forEach(b => b.onclick = () => { b.classList.add("open"); seen.add(b.dataset.k); const btn = foot.firstChild; btn.textContent = seen.size === a.cards.length ? "Continue" : `Open all the cards (${seen.size}/${a.cards.length})`; if (seen.size === a.cards.length) { btn.disabled = false; btn.onclick = () => finish(null, true); } });
+};
+ACT.choice = (h, a, foot, finish) => {
+  let pick = null;
+  h.innerHTML = `<span class="eyebrow">${icon("target")} Decide</span>${a.scenario ? `<div class="scenario">${icon("school")}<p>${md(a.scenario)}</p></div>` : ""}<h2>${esc(a.q)}</h2>
+    <div class="opts">${a.options.map((o, k) => `<button class="opt" data-k="${k}"><span class="opt-l">${"ABCD"[k]}</span><span>${esc(o)}</span></button>`).join("")}</div><div id="fb"></div>`;
+  foot.innerHTML = `<button class="btn primary wide" disabled>Check</button>`;
+  const check = foot.firstChild;
+  $$(".opt", h).forEach(b => b.onclick = () => { if (h.dataset.locked) return; $$(".opt", h).forEach(x => x.classList.remove("sel")); b.classList.add("sel"); pick = +b.dataset.k; check.disabled = false; });
+  check.onclick = () => {
+    h.dataset.locked = 1; const ok = pick === a.answer;
+    $$(".opt", h).forEach(x => { const k = +x.dataset.k; x.classList.toggle("right", k === a.answer); x.classList.toggle("wrong", k === pick && !ok); x.disabled = true; });
+    $("#fb", h).innerHTML = feedback(ok, `<b>${ok ? "Well done!" : "Not quite."}</b> ${md(a.why[pick])}${ok ? "" : `<br><span class="muted">${md(a.why[a.answer])}</span>`}`);
+    finish(ok);
+  };
+};
+ACT.tf = (h, a, foot, finish) => {
+  const ans = {};
+  h.innerHTML = `<span class="eyebrow">${icon("quiz")} True or false</span><h2>${esc(a.title || "True or false?")}</h2>
+    <ol class="tf">${a.items.map((it, k) => `<li data-k="${k}"><p>${md(it.s)}</p><div class="tf-b"><button data-v="1">True</button><button data-v="0">False</button></div><div class="tf-fb"></div></li>`).join("")}</ol>`;
+  foot.innerHTML = `<button class="btn primary wide" disabled>Check</button>`;
+  const check = foot.firstChild;
+  $$(".tf li", h).forEach(li => $$("button", li).forEach(b => b.onclick = () => { if (h.dataset.locked) return; $$("button", li).forEach(x => x.classList.remove("sel")); b.classList.add("sel"); ans[li.dataset.k] = b.dataset.v === "1"; check.disabled = Object.keys(ans).length < a.items.length; }));
+  check.onclick = () => {
+    h.dataset.locked = 1; let all = true;
+    a.items.forEach((it, k) => { const li = $(`li[data-k="${k}"]`, h), ok = ans[k] === it.a; all = all && ok; li.classList.add(ok ? "right" : "wrong"); $(".tf-fb", li).innerHTML = feedback(ok, `<b>${it.a ? "True" : "False"}.</b> ${md(it.why)}`); });
+    finish(all);
+  };
+};
+ACT.sort = (h, a, foot, finish) => {
+  const place = {}; let sel = null;
+  const items = shuffle(a.items.map((it, k) => Object.assign({ k }, it)));
+  const draw = () => {
+    h.innerHTML = `<span class="eyebrow">${icon("route")} Sort</span><h2>${esc(a.q)}</h2><p class="muted small">Tap a card, then tap the box where it belongs.</p>
+      <div class="pool">${items.filter(it => place[it.k] == null).map(it => `<button class="tile ${sel === it.k ? "sel" : ""}" data-k="${it.k}">${esc(it.t)}</button>`).join("") || `<span class="muted small">All placed. Tap a card in a box to move it back.</span>`}</div>
+      <div class="buckets" style="--n:${a.buckets.length}">${a.buckets.map((b, bi) => `<div class="bucket" data-b="${bi}"><b>${esc(b)}</b>${items.filter(it => place[it.k] === bi).map(it => `<button class="tile in ${h.dataset.locked ? (it.b === bi ? "right" : "wrong") : ""}" data-k="${it.k}">${esc(it.t)}${h.dataset.locked && it.b !== bi ? `<small>→ ${esc(a.buckets[it.b])}</small>` : ""}</button>`).join("")}</div>`).join("")}</div><div id="fb"></div>`;
+    if (h.dataset.locked) return;
+    $$(".pool .tile", h).forEach(t => t.onclick = () => { sel = +t.dataset.k; draw(); });
+    $$(".bucket", h).forEach(b => b.onclick = e => {
+      const t = e.target.closest(".tile.in");
+      if (sel != null) { place[sel] = +b.dataset.b; sel = null; draw(); return; }
+      if (t) { delete place[t.dataset.k]; draw(); }
+    });
+    const btn = foot.firstChild; btn.disabled = Object.keys(place).length < items.length;
+  };
+  foot.innerHTML = `<button class="btn primary wide" disabled>Check</button>`;
+  foot.firstChild.onclick = () => {
+    h.dataset.locked = 1; const ok = items.every(it => place[it.k] === it.b); draw();
+    $("#fb", h).innerHTML = feedback(ok, `<b>${ok ? "Perfect!" : `${items.filter(it => place[it.k] === it.b).length} of ${items.length} in the right box.`}</b> ${md(a.explain || "")}`);
+    finish(ok);
+  };
+  draw();
+};
+ACT.order = (h, a, foot, finish) => {
+  let list = shuffle(a.steps.map((t, k) => ({ t, k })));
+  if (list.every((x, i) => x.k === i)) list.reverse();
+  const draw = () => {
+    const locked = !!h.dataset.locked;
+    h.innerHTML = `<span class="eyebrow">${icon("route")} Order</span><h2>${esc(a.q)}</h2><p class="muted small">Use the arrows to move each step.</p>
+      <ol class="order">${list.map((x, i) => `<li class="${locked ? (x.k === i ? "right" : "wrong") : ""}"><span class="num">${i + 1}</span><span class="t">${esc(x.t)}</span>${locked ? (x.k === i ? icon("check") : `<small>should be ${x.k + 1}</small>`) : `<span class="mv"><button data-i="${i}" data-d="-1" aria-label="Move up" ${i ? "" : "disabled"}>↑</button><button data-i="${i}" data-d="1" aria-label="Move down" ${i < list.length - 1 ? "" : "disabled"}>↓</button></span>`}</li>`).join("")}</ol><div id="fb"></div>`;
+    $$(".mv button", h).forEach(b => b.onclick = () => { const i = +b.dataset.i, j = i + +b.dataset.d; [list[i], list[j]] = [list[j], list[i]]; draw(); });
+  };
+  foot.innerHTML = `<button class="btn primary wide">Check</button>`;
+  foot.firstChild.onclick = () => {
+    h.dataset.locked = 1; const ok = list.every((x, i) => x.k === i); draw();
+    $("#fb", h).innerHTML = feedback(ok, `<b>${ok ? "Right order!" : "Here is the right order."}</b> ${ok ? "" : `<ol class="small">${a.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>`}${md(a.explain || "")}`);
+    finish(ok);
+  };
+  draw();
+};
+ACT.reflect = (h, a, foot, finish, id) => {
+  h.innerHTML = `<span class="eyebrow">${icon("note")} Reflect</span><h2>${esc(a.q)}</h2><textarea id="note" rows="5" placeholder="${esc(a.placeholder || "")}">${esc(S.notes[id] || "")}</textarea><p class="muted small">Your answer is saved in <b>Profile › My notes</b>. Only you can see it.</p>`;
+  foot.innerHTML = `<button class="btn primary wide" disabled>Save</button>`;
+  const ta = $("#note", h), btn = foot.firstChild;
+  const upd = () => btn.disabled = ta.value.trim().length < 5; ta.oninput = upd; upd();
+  btn.onclick = () => { S.notes[id] = ta.value.trim(); save(); toast("Saved in My notes"); finish(null, true); };
+};
+
+/* ---------- final quiz and certificate ---------- */
+const passMark = () => Math.ceil(COURSE().quiz.length * 0.75);
+ROUTES.quiz = v => {
+  const c = COURSE();
+  if (!allUnitsDone()) { toast("Complete all the units to unlock the quiz."); return go("academy"); }
+  let i = 0, score = 0;
+  const qs = c.quiz.map(q => { const order = shuffle(q.options.map((o, k) => k)); return { q: q.q, options: order.map(k => q.options[k]), answer: order.indexOf(q.answer) }; });
+  const draw = () => {
+    if (i === qs.length) return result();
+    const q = qs[i];
+    v.innerHTML = `<div class="player"><div class="player-top"><a href="#academy" class="icon-btn" aria-label="Close quiz">${icon("close")}</a><div class="steps">${qs.map((_, k) => `<i class="${k < i ? "done" : ""} ${k === i ? "now" : ""}"></i>`).join("")}</div><span class="xp-pill">${score}/${qs.length}</span></div>
+      <div class="act card"><span class="eyebrow">${icon("quiz")} Final quiz · question ${i + 1} of ${qs.length}</span><h2>${esc(q.q)}</h2><div class="opts">${q.options.map((o, k) => `<button class="opt" data-k="${k}"><span class="opt-l">${"ABC"[k]}</span><span>${esc(o)}</span></button>`).join("")}</div></div><div class="player-foot" id="foot"></div></div>`;
+    $$(".opt", v).forEach(b => b.onclick = () => {
+      const k = +b.dataset.k, ok = k === q.answer; if (ok) score++;
+      $$(".opt", v).forEach(x => { x.disabled = true; x.classList.toggle("right", +x.dataset.k === q.answer); x.classList.toggle("wrong", +x.dataset.k === k && !ok); });
+      $("#foot").innerHTML = `<button class="btn primary wide">${i === qs.length - 1 ? "See result" : "Next question"} ${icon("arrow")}</button>`;
+      $("#foot button").onclick = () => { i++; draw(); };
+    });
+  };
+  const result = () => {
+    const pass = score >= passMark(), prev = S.quiz;
+    if (!prev || score > prev.score) S.quiz = { score, of: qs.length, pass, d: todayISO() };
+    if (pass && !S.certs.some(x => x.id === c.id)) { S.certs.push({ id: c.id, title: c.title, name: USER.name, d: todayISO(), score }); addXP(50, `Certificate earned: ${c.title}`); }
+    else save();
+    v.innerHTML = `<div class="celebrate card"><div class="medal ${pass ? "" : "grey"}">${icon(pass ? "cert" : "quiz")}</div><h1>${pass ? "You passed!" : "Almost there"}</h1><p class="big-score">${score} / ${qs.length}</p>
+      <p>${pass ? "Your certificate is ready." : `You need ${passMark()} correct answers. Review the units and try again.`}</p>
+      <div class="row gap center">${pass ? `<a class="btn primary" href="#cert/${c.id}">${icon("cert")} View certificate</a>` : `<a class="btn primary" href="#quiz" onclick="setTimeout(route)">Try again</a>`}<a class="btn" href="#academy">Course map</a></div></div>
+      ${pass ? `<div class="card tip-course"><p><b>Next step:</b> put it into practice. Your school can use an Erasmus+ grant to send you on an eMove course.</p>${courseCTA(pickCourse().pathway)}</div>` : ""}`;
+  };
+  draw();
+};
+ROUTES.cert = (v, [id]) => {
+  const c = S.certs.find(x => x.id === id); if (!c) return go("academy");
+  v.innerHTML = `<div class="row gap no-print"><a class="back" href="#academy">${icon("back")} Course map</a><button class="btn primary" onclick="window.print()">${icon("print")} Print or save as PDF</button></div>
+    <div class="cert"><div class="cert-in">${MARK(64)}<span class="eyebrow">EMOVE Profe · eMove Academy</span><h1>Certificate of completion</h1><p>This certifies that</p><p class="cert-name">${esc(c.name || (USER && USER.name) || "")}</p>
+    <p>has completed the online microcourse</p><p class="cert-course">${esc(c.title)}</p><p class="muted">About ${COURSE().minutes} minutes · ${COURSE().units.length} units · final quiz ${c.score}/${COURSE().quiz.length}</p>
+    <div class="cert-foot"><span>${new Date(c.d).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span><span>eMove Academy · A European Teacher Academy</span></div>
+    <p class="cert-note">Certificate of completion of a free online microcourse. It is not an official qualification.</p></div></div>`;
+};
+
+ROUTES.glossary = v => {
+  v.innerHTML = `<a class="back" href="#academy">${icon("back")} Course map</a><div class="page-h"><h1>${icon("open")} Erasmus+ glossary</h1><p class="muted">The words you will find in calls, forms and guides.</p></div>
+    <label class="search wide">${icon("search")}<input id="gq" placeholder="Search a term…"></label><dl class="gloss" id="gl"></dl>`;
+  const draw = q => { $("#gl").innerHTML = GLOSSARY.filter(([t, d]) => !q || (t + d).toLowerCase().includes(q)).map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("") || `<p class="muted">No terms found.</p>`; };
+  $("#gq").oninput = e => draw(e.target.value.toLowerCase()); draw("");
+};
+
+/* ============ HOME, RESOURCES, eMove COURSES, PROFILE ============ */
+ROUTES.home = v => {
+  const first = (USER.name || "").split(" ")[0], lv = level(), p = courseProgress(), nu = nextUnit();
+  const fav = S.favs.map(resById).filter(Boolean);
+  const ints = USER.interests || [];
+  const forYou = [...RESOURCES.filter(r => ints.includes(r.pathway)), ...RESOURCES.filter(r => !ints.includes(r.pathway))].slice(0, 3);
+  const c = pickCourse();
+  v.innerHTML = `<section class="welcome"><div><span class="eyebrow">Welcome${S.xp ? " back" : ""}</span><h1>Hello, ${esc(first)}!</h1><p class="muted">Learn how Erasmus+ can fund your next training abroad, and find ideas for your class tomorrow.</p></div>
+      <div class="lv card"><span class="lv-n">Level ${lv.lv}</span><b>${lv.name}</b><div class="bar"><i style="width:${lv.next ? Math.min(100, S.xp / lv.next * 100) : 100}%"></i></div><span class="muted small">${S.xp} XP${lv.next ? ` · ${lv.next - S.xp} to next level` : ""}</span></div></section>
+    <section class="card continue"><div class="continue-ring">${ring(p, 84, Math.round(p * 100) + "%")}</div><div class="grow"><span class="eyebrow">${icon("academy")} Your microcourse</span><h2>${esc(COURSE().title)}</h2>
+      <p class="muted">${nu ? `Next: <b>${esc(nu.title)}</b>` : S.quiz && S.quiz.pass ? "Completed. Your certificate is ready." : "All units done. Take the final quiz!"}</p></div>
+      <a class="btn primary" href="${nu ? "#unit/" + nu.id : S.quiz && S.quiz.pass ? "#cert/" + COURSE().id : "#quiz"}">${nu ? (p ? "Continue" : "Start") : S.quiz && S.quiz.pass ? "Certificate" : "Final quiz"} ${icon("arrow")}</a></section>
+    <div class="grid2">
+      <section class="card deadline"><span class="eyebrow">${icon("calendar")} Erasmus+ calendar</span><h3>Main KA1 deadline: usually in February</h3><p class="muted">Short-term projects (KA122) and accredited projects (KA121) usually apply in February. Some countries open a second KA122 round in the autumn. Check your National Agency's dates.</p><a class="link" href="#unit/u2">Which route is yours? ${icon("arrow")}</a></section>
+      <section class="card"><span class="eyebrow">${icon("plane")} Course for you</span><h3>${esc(c.title)}</h3><p class="muted">${esc(c.sub)}</p><p class="small">${icon("pin")} ${esc(c.city)} · ${esc(c.dates)} · ${esc(c.price)}</p><a class="link" href="#courses">See all eMove courses ${icon("arrow")}</a></section>
+    </div>
+    <div class="sec-row"><h2 class="sec-t">${fav.length ? "Your saved resources" : "Resources for your class"}</h2><a class="link" href="#resources">All resources ${icon("arrow")}</a></div>
+    <div class="grid3">${(fav.length ? fav.slice(0, 3) : forYou).map(resCard).join("")}</div>`;
+};
+
+/* ---------- resources ---------- */
+const resCard = r => { const p = pathwayById(r.pathway); return `<a class="card res" href="#res/${r.id}" style="--c:${p.color}"><div class="res-top"><span class="chip" style="--c:${p.color}">${icon(p.icon)} ${esc(p.name)}</span>${S.favs.includes(r.id) ? `<span class="fav-on">${icon("bookmark")}</span>` : ""}</div>
+  <b>${esc(r.title)}</b><p class="muted">${esc(r.summary)}</p><div class="res-meta"><span>${esc(r.type)}</span><span>${icon("clock")} ${r.minutes} min</span><span>${esc(r.stages.length > 2 ? r.stages[0] + " +" : r.stages.join(", "))}</span></div></a>`; };
+let RES_F = { p: "", stage: "", type: "", q: "", fav: false };
+ROUTES.resources = v => {
+  v.innerHTML = `<div class="page-h"><h1>${icon("book")} Resources</h1><p class="muted">Ready-to-use activities, routines and templates, organised by the seven eMove pathways.</p></div>
+    <div class="filters"><div class="pchips"><button data-p="" class="${RES_F.p ? "" : "on"}">All</button>${PATHWAYS.map(p => `<button data-p="${p.id}" style="--c:${p.color}" class="${RES_F.p === p.id ? "on" : ""}">${icon(p.icon)} ${p.name}</button>`).join("")}</div>
+    <div class="frow"><label class="search">${icon("search")}<input id="rq" placeholder="Search resources…" value="${esc(RES_F.q)}"></label>
+      <select id="rs"><option value="">All stages</option>${STAGES.filter(s => s !== "All stages").map(s => `<option ${RES_F.stage === s ? "selected" : ""}>${s}</option>`).join("")}</select>
+      <select id="rt"><option value="">All types</option>${RES_TYPES.map(t => `<option ${RES_F.type === t ? "selected" : ""}>${t}</option>`).join("")}</select>
+      <label class="check inline"><input type="checkbox" id="rf" ${RES_F.fav ? "checked" : ""}><span>Saved only</span></label></div></div>
+    <div id="rp"></div><div class="grid3" id="rl"></div>`;
+  const draw = () => {
+    const list = RESOURCES.filter(r => (!RES_F.p || r.pathway === RES_F.p) && (!RES_F.stage || r.stages.includes(RES_F.stage) || r.stages.includes("All stages")) && (!RES_F.type || r.type === RES_F.type)
+      && (!RES_F.fav || S.favs.includes(r.id)) && (!RES_F.q || (r.title + r.summary + r.objective).toLowerCase().includes(RES_F.q.toLowerCase())));
+    const p = RES_F.p && pathwayById(RES_F.p);
+    $("#rp").innerHTML = p ? `<div class="path-intro" style="--c:${p.color}">${icon(p.icon)}<div><b>${p.name}</b><span>${esc(p.line)}</span></div></div>` : "";
+    $("#rl").innerHTML = list.map(resCard).join("") || `<p class="muted empty">No resources match these filters yet.</p>`;
+  };
+  $$(".pchips button").forEach(b => b.onclick = () => { RES_F.p = b.dataset.p; $$(".pchips button").forEach(x => x.classList.toggle("on", x === b)); draw(); });
+  $("#rq").oninput = e => { RES_F.q = e.target.value; draw(); };
+  $("#rs").onchange = e => { RES_F.stage = e.target.value; draw(); };
+  $("#rt").onchange = e => { RES_F.type = e.target.value; draw(); };
+  $("#rf").onchange = e => { RES_F.fav = e.target.checked; draw(); };
+  draw();
+};
+ROUTES.res = (v, [id]) => {
+  const r = resById(id); if (!r) return go("resources");
+  const p = pathwayById(r.pathway), fav = S.favs.includes(r.id);
+  if (!S.done["res-" + r.id]) { S.done["res-" + r.id] = { d: todayISO() }; addXP(5, `Opened resource: ${r.title}`); }
+  v.innerHTML = `<a class="back no-print" href="#resources">${icon("back")} Resources</a>
+    <article class="resource" style="--c:${p.color}"><header><span class="chip" style="--c:${p.color}">${icon(p.icon)} ${esc(p.name)}</span><h1>${esc(r.title)}</h1><p class="lead">${esc(r.summary)}</p>
+      <div class="res-meta big"><span>${esc(r.type)}</span><span>${icon("clock")} ${r.minutes} minutes</span><span>${icon("users")} ${esc(r.stages.join(", "))}</span></div>
+      <div class="row gap no-print"><button class="btn ${fav ? "on" : ""}" id="fav">${icon("bookmark")} ${fav ? "Saved" : "Save"}</button><button class="btn" onclick="window.print()">${icon("print")} Print or save as PDF</button></div></header>
+    <section><h2>Objective</h2><p>${esc(r.objective)}</p></section>
+    <section><h2>Step by step</h2><ol class="steps-l">${r.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol></section>
+    <div class="grid2"><section><h2>Materials</h2><ul>${r.materials.map(m => `<li>${esc(m)}</li>`).join("")}</ul></section><section><h2>Assessment</h2><p>${esc(r.assessment)}</p></section></div>
+    ${r.variation ? `<section class="tip">${icon("spark")}<p><b>Variation.</b> ${esc(r.variation)}</p></section>` : ""}
+    <p class="print-only small">EMOVE Profe · eMove Academy · ${EMOVE_SITE.replace("https://", "")}</p></article>
+    <div class="no-print">${courseCTA(r.pathway, coursesFor(r.pathway).length ? "This resource comes from the " + p.name + " pathway. Live it in a full course with teachers from all over Europe." : "We design tailor-made courses on this pathway for schools and groups.")}</div>`;
+  $("#fav").onclick = () => { const i = S.favs.indexOf(r.id); i < 0 ? S.favs.push(r.id) : S.favs.splice(i, 1); save(); toast(i < 0 ? "Saved to your resources" : "Removed from saved"); route(); };
+};
+
+/* ---------- eMove courses ---------- */
+ROUTES.courses = v => {
+  v.innerHTML = `<div class="page-h"><h1>${icon("plane")} eMove courses</h1><p class="muted">Five-day courses in Spain, taught in English, in small international groups. Erasmus+ compatible: your school can fund them with an Erasmus+ grant.</p></div>
+    <section class="card fund"><div>${icon("wallet", "big")}</div><div class="grow"><h3>How do I pay for it with Erasmus+?</h3><p class="muted">Your school applies to its National Agency (KA122 or KA121). The grant can cover the course fee, travel and daily costs. Learn the whole process in the free microcourse.</p></div><a class="btn" href="#academy">Open the microcourse ${icon("arrow")}</a></section>
+    <h2 class="sec-t">Summer 2027 · registration open</h2>
+    <div class="grid3">${EMOVE_COURSES.map(c => { const p = pathwayById(c.pathway); return `<article class="card course" style="--c:${p.color}"><span class="chip" style="--c:${p.color}">${icon(p.icon)} ${esc(p.name)}</span><h3>${esc(c.title)}</h3><p class="muted">${esc(c.sub)}</p>
+      <ul class="facts"><li>${icon("pin")} ${esc(c.city)}, Spain</li><li>${icon("calendar")} ${esc(c.dates)}</li><li>${icon("clock")} ${esc(c.days)}</li><li>${icon("wallet")} ${esc(c.price)} · Erasmus+ compatible</li></ul>
+      <a class="btn primary wide" href="${c.url}" target="_blank" rel="noopener" data-course="${c.id}">View course ${icon("external")}</a></article>`; }).join("")}</div>
+    <section class="card schools"><div class="grow"><h3>${esc(FOR_SCHOOLS.title)}</h3><p class="muted">${esc(FOR_SCHOOLS.sub)}. Ideal for whole teams and for the European Citizenship and Leadership pathways.</p></div><a class="btn" href="${FOR_SCHOOLS.url}" target="_blank" rel="noopener" data-course="schools">For schools ${icon("external")}</a></section>
+    <h2 class="sec-t">Seven pathways</h2><div class="pathways">${PATHWAYS.map(p => `<a class="pw" href="#resources" data-pw="${p.id}" style="--c:${p.color}">${icon(p.icon)}<b>${p.name}</b><span>${esc(p.line)}</span><em>${coursesFor(p.id).length ? coursesFor(p.id).length + " course" + (coursesFor(p.id).length > 1 ? "s" : "") : "Tailor-made"} · ${RESOURCES.filter(r => r.pathway === p.id).length} resources</em></a>`).join("")}</div>`;
+  $$("[data-pw]").forEach(a => a.onclick = () => { RES_F.p = a.dataset.pw; });
+};
+
+/* ---------- profile ---------- */
+ROUTES.profile = v => {
+  const lv = level(), notes = Object.entries(S.notes).filter(([, t]) => t);
+  const qOf = id => { const [u, i] = id.split("-"), un = unitById(u); return un && un.activities[+i] ? un.activities[+i].q : id; };
+  v.innerHTML = `<div class="page-h"><h1>${icon("user")} ${esc(USER.name)}</h1><p class="muted">${esc([USER.school, USER.country].filter(Boolean).join(" · "))}</p></div>
+    <div class="stats"><div class="stat"><b>${S.xp}</b><span>XP · ${lv.name}</span></div><div class="stat"><b>${COURSE().units.filter(u => S.units[u.id]).length}/${COURSE().units.length}</b><span>units</span></div><div class="stat"><b>${S.certs.length}</b><span>certificates</span></div><div class="stat"><b>${S.favs.length}</b><span>saved resources</span></div><div class="stat"><b>${S.days.length}</b><span>days learning</span></div></div>
+    <div class="grid2">
+    <section class="card"><h2>${icon("cert")} Certificates</h2>${S.certs.length ? S.certs.map(c => `<a class="row-link" href="#cert/${c.id}">${icon("cert")}<span><b>${esc(c.title)}</b><small>${esc(c.d)} · ${c.score}/${COURSE().quiz.length}</small></span>${icon("arrow")}</a>`).join("") : `<p class="muted">Finish the microcourse and pass the quiz to earn your first certificate.</p>`}</section>
+    <section class="card"><h2>${icon("note")} My notes</h2>${notes.length ? notes.map(([id, t]) => `<div class="note"><small class="muted">${esc(qOf(id))}</small><p>${esc(t)}</p></div>`).join("") : `<p class="muted">Your answers to the "Reflect" activities will appear here.</p>`}</section>
+    </div>
+    ${PREVIEW ? `<p class="notice">Preview mode: accounts are switched off on this copy.</p>` : `<div class="grid2"><section class="card"><h2>Your details</h2><form id="pf" class="form">
+      <label>Full name<input name="name" value="${esc(USER.name)}"></label>
+      <div class="two"><label>School<input name="school" value="${esc(USER.school || "")}"></label><label>Country<select name="country">${COUNTRIES.map(c => `<option ${USER.country === c ? "selected" : ""}>${c}</option>`).join("")}</select></label></div>
+      <div class="two"><label>Role<select name="role">${ROLES.map(([k, t]) => `<option value="${k}" ${USER.role === k ? "selected" : ""}>${t}</option>`).join("")}</select></label><label>Stage<select name="stage">${STAGES.map(s => `<option ${USER.stage === s ? "selected" : ""}>${s}</option>`).join("")}</select></label></div>
+      <label>Subject or area<input name="subject" value="${esc(USER.subject || "")}"></label>
+      <fieldset><legend>Interests</legend><div class="checks">${PATHWAYS.map(p => `<label class="check"><input type="checkbox" name="interests" value="${p.id}" ${(USER.interests || []).includes(p.id) ? "checked" : ""}><span>${p.name}</span></label>`).join("")}</div></fieldset>
+      <label class="check"><input type="checkbox" name="news" ${USER.news ? "checked" : ""}><span>Send me news about Erasmus+ deadlines and eMove courses.</span></label>
+      <button class="btn primary">Save details</button></form></section>
+    <section class="card"><h2>Password</h2><form id="pw" class="form"><label>Current password<input type="password" name="old" autocomplete="current-password"></label><label>New password<input type="password" name="password" minlength="8" autocomplete="new-password"><small>At least 8 characters.</small></label><p class="err" id="pwe"></p><button class="btn">Change password</button></form>
+    <hr><button class="btn danger" id="out">${icon("logout")} Sign out</button></section></div>`}`;
+  if (PREVIEW) return;
+  $("#pf").onsubmit = async e => {
+    e.preventDefault(); const f = new FormData(e.target);
+    const b = Object.fromEntries(["name", "school", "country", "role", "stage", "subject"].map(k => [k, f.get(k) || ""])); b.interests = f.getAll("interests"); b.news = !!f.get("news");
+    const r = await api("profile", b);
+    if (!r.ok) return toast(r.data.message || "Could not save.");
+    USER = r.data.user; AUTH.user = USER; authSave(AUTH); toast("Details saved"); route();
+  };
+  $("#pw").onsubmit = async e => {
+    e.preventDefault(); const f = new FormData(e.target);
+    const r = await api("password", { old: f.get("old"), password: f.get("password") });
+    if (!r.ok) { $("#pwe").textContent = r.data.message || "Could not change it."; return; }
+    AUTH.token = r.data.token; authSave(AUTH); e.target.reset(); $("#pwe").textContent = ""; toast("Password changed");
+  };
+  $("#out").onclick = signOut;
+};
+
+document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", start) : start();
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js");
+</script></body></html>
