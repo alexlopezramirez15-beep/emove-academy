@@ -54,3 +54,5 @@ The dev server keeps accounts in `.store/`. Request access with the email in `AD
    - `ADMIN_EMAILS`: the super-admin email (several separated by commas).
    - `AUTH_SECRET`: a random text of at least 32 characters.
 3. Deploy. The website is at `/`, the platform at `/app/`.
+
+Environment variables only reach the accounts API after a new deploy: after changing them, push a commit or use *Deploys → Trigger deploy*.
