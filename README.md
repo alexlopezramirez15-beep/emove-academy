@@ -11,7 +11,7 @@ A public website plus an installable web app (PWA). Teachers request access, the
 
 The **super-admin** (Admin tab) approves or rejects requests, resets passwords, deletes accounts, sees each teacher's progress and which eMove courses they opened, and exports the list to CSV.
 
-Everything is in English. All access is free; there are no payments.
+The platform is in English; the public website is in English and Spanish with a language switch. All access is free; there are no payments.
 
 ## Structure
 
@@ -26,8 +26,8 @@ src/
   pages.js           home, resources, eMove courses, profile
   styles.css         visual system (eMove colours, Inter)
 web/
-  website.py         public website: home, guides, resources preview, privacy
-  guides.py          the Erasmus+ guides
+  website.py         public website: one interactive landing page in English and Spanish
+  guides.py          the Erasmus+ guides (English and Spanish)
   web.css            styles of the public website
 netlify/functions/
   api.mjs            accounts API (Netlify Functions + Netlify Blobs)

@@ -1,6 +1,6 @@
 """Builds the website and the platform into dist/.
 
-dist/                    public website (home, guides, resources preview, privacy) → web/website.py
+dist/index.html          public website: one landing page in English and Spanish → web/website.py
 dist/app/index.html      the platform: installable web app (PWA) with manifest, service worker and icons
 """
 import hashlib, json, pathlib, shutil, subprocess, sys
