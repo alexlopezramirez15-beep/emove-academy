@@ -29,3 +29,15 @@ const FOR_SCHOOLS = { title: "Tailor-made courses for your school", sub: "Group 
 const STAGES = ["Early childhood", "Primary", "Lower secondary", "Upper secondary", "Vocational (VET)", "Adult education", "All stages"];
 const ROLES = [["teacher", "Teacher"], ["coordinator", "Erasmus+ / international coordinator"], ["head", "School leader"], ["trainer", "Teacher trainer"], ["other", "Other"]];
 const COUNTRIES = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", "Romania", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Türkiye", "Other"];
+
+/* ---------- community ---------- */
+const SPACES = [
+  { id: "staffroom", name: "Staff room", icon: "users", line: "Introduce yourself and talk about teaching with colleagues from all over Europe." },
+  { id: "erasmus", name: "Erasmus+ help desk", icon: "wallet", line: "Questions about applications, budgets, deadlines and reports. Teachers and the eMove team answer." },
+  { id: "partners", name: "Find a partner", icon: "globe", line: "Looking for a school for eTwinning, a KA2 project or job shadowing? Post it here." },
+  { id: "ideas", name: "Classroom ideas", icon: "spark", line: "Share how you used a resource, what worked and what you would change." },
+  ...EMOVE_COURSES.map(c => ({ id: "course-" + c.id, name: c.title, icon: "plane", course: c.id, line: "Talk about the course, prepare your mobility and meet the teachers who are going." }))
+];
+const spaceById = id => SPACES.find(s => s.id === id);
+const LOOKING = [["partners", "Partners for an Erasmus+ project"], ["etwinning", "An eTwinning partner"], ["shadowing", "A school for job shadowing"], ["host", "Hosting job shadowing at my school"], ["resources", "Sharing resources"], ["course-buddy", "A colleague for an eMove course"]];
+const LOOKING_NAME = Object.fromEntries(LOOKING);

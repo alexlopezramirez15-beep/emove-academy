@@ -49,7 +49,16 @@ const IC = {
   users: '<circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c.8-3 3-5 6-5s5.2 2 6 5"/><path d="M15 14.5c2.5 0 4.5 1.5 5.5 4"/>',
   download: '<path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/>',
   calendar: '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
-  pin: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.5"/>'
+  pin: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
+  send: '<path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/>',
+  trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  list: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  toolbox: '<rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V5h8v3M3 13h18M10 13v2h4v-2"/>'
 };
 const icon = (k, cls = "") => `<svg class="ic ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k] || ""}</svg>`;
 /* brand mark: EU-blue disc, ring of stars and the yellow forward arrow */
@@ -59,12 +68,12 @@ const LOGO = `<span class="logo">${MARK(34)}<span class="logo-t"><b>EMOVE</b> Pr
 
 /* ---------- state (per device, synced to the account) ---------- */
 const KEY = "emove-profe-v1";
-const freshState = () => ({ xp: 0, done: {}, units: {}, notes: {}, favs: [], quiz: null, certs: [], clicks: {}, days: [], log: [] });
+const freshState = () => ({ xp: 0, done: {}, units: {}, notes: {}, favs: [], quiz: null, certs: [], clicks: {}, syl: {}, days: [], log: [] });
 let S = (() => { try { return Object.assign(freshState(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) { return freshState(); } })();
 let USER = null;      // signed-in account (from the server)
 function summary() {
   const c = COURSES[0];
-  return { xp: S.xp, units: c.units.filter(u => S.units[u.id]).length, of: c.units.length, quiz: S.quiz, certs: S.certs.length, favs: S.favs.length, clicks: Object.keys(S.clicks).length, last: todayISO() };
+  return { xp: S.xp, units: c.units.filter(u => S.units[u.id]).length, of: c.units.length, quiz: S.quiz, certs: S.certs.length, favs: S.favs.length, clicks: Object.keys(S.clicks).length, syl: Object.keys(S.syl || {}).length, last: todayISO() };
 }
 function save(sync = true) {
   S.summary = summary();
@@ -109,7 +118,9 @@ document.addEventListener("click", e => {
 });
 
 /* ---------- shell and router ---------- */
-const NAV = [["home", "Home", "home"], ["academy", "Academy", "academy"], ["resources", "Resources", "book"], ["courses", "eMove courses", "plane"], ["profile", "Profile", "user"]];
+const NAV = [["home", "Home", "home"], ["learn", "Learn", "academy"], ["resources", "Resources", "book"], ["community", "Community", "chat"], ["profile", "Profile", "user"]];
+/* which tab of the menu each page belongs to */
+const NAV_OF = { academy: "learn", unit: "learn", lesson: "learn", quiz: "learn", glossary: "learn", cert: "learn", course: "learn", courses: "learn", res: "resources", space: "community", thread: "community", members: "community" };
 function shell() {
   document.body.innerHTML = `<header class="top"><a href="#home" class="brand" aria-label="EMOVE Profe home">${LOGO}</a>
     <nav class="nav">${NAV.map(([k, t, i]) => `<a href="#${k}" data-nav="${k}">${icon(i)}<span>${t}</span></a>`).join("")}${USER && USER.admin ? `<a href="#admin" data-nav="admin">${icon("shield")}<span>Admin</span><em id="pend"></em></a>` : ""}</nav></header>
@@ -120,7 +131,7 @@ const ROUTES = {};
 function route() {
   const h = (location.hash || "#home").slice(1).split("/");
   const fn = ROUTES[h[0]] || ROUTES.home;
-  $$("[data-nav]").forEach(a => a.classList.toggle("on", a.dataset.nav === (h[0] === "unit" || h[0] === "lesson" || h[0] === "quiz" || h[0] === "glossary" ? "academy" : h[0] === "res" ? "resources" : h[0])));
+  $$("[data-nav]").forEach(a => a.classList.toggle("on", a.dataset.nav === (NAV_OF[h[0]] || h[0])));
   const v = $("#view"); v.innerHTML = ""; v.className = "view v-" + h[0];
   fn(v, h.slice(1));
   window.scrollTo(0, 0);

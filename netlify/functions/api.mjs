@@ -1,5 +1,6 @@
-/* EMOVE Profe · accounts API
+/* EMOVE Profe · accounts and community API
    Teachers request access with their details; the super-admin approves each account before it can sign in.
+   Approved teachers can post in the discussion spaces and appear in the teacher directory if they choose to.
    Environment variables (Netlify): AUTH_SECRET (signs sessions, 32+ characters), ADMIN_EMAILS (super-admin emails, comma separated).
    Accounts live in Netlify Blobs (store "emove-users"). For local tests, EP_STORE_DIR keeps them as JSON files. */
 import { scrypt as _scrypt, randomBytes, createHmac, timingSafeEqual } from "node:crypto";
@@ -11,6 +12,10 @@ const scrypt = promisify(_scrypt);
 const SESSION_DAYS = 30;
 const MAX_FAILS = 6, LOCK_MIN = 15;
 const ROLES = ["teacher", "coordinator", "head", "trainer", "other"];
+const COURSE_IDS = ["game-on", "ai-teacher", "think", "shine", "outside", "happy"];
+const SPACES = ["staffroom", "erasmus", "partners", "ideas", ...COURSE_IDS.map(c => "course-" + c)];
+const LOOKING = ["partners", "etwinning", "shadowing", "host", "resources", "course-buddy"];
+const POSTS_PER_HOUR = 20;
 
 /* ---- store ---- */
 async function storeFor() {
@@ -86,7 +91,8 @@ const session = u => sign({ e: u.email, v: u.tv || 0, exp: Date.now() + SESSION_
 const pub = u => ({
   email: u.email, name: u.name, school: u.school, country: u.country, role: u.role, stage: u.stage, subject: u.subject,
   interests: u.interests || [], news: !!u.news, status: u.status, admin: isAdminEmail(u.email),
-  created: u.created, decided: u.decided, lastLogin: u.lastLogin
+  created: u.created, decided: u.decided, lastLogin: u.lastLogin,
+  directory: !!u.directory, showEmail: !!u.showEmail, bio: u.bio || "", looking: u.looking || [], going: u.going || []
 });
 
 async function authed(req, store) {
@@ -161,6 +167,11 @@ async function profile(req, store) {
   if (ROLES.includes(b.role)) u.role = b.role;
   if (Array.isArray(b.interests)) u.interests = b.interests.map(x => clip(x, 40)).filter(Boolean).slice(0, 10);
   if (typeof b.news === "boolean") u.news = b.news;
+  if (typeof b.directory === "boolean") u.directory = b.directory;
+  if (typeof b.showEmail === "boolean") u.showEmail = b.showEmail;
+  if (b.bio != null) u.bio = clip(b.bio, 300);
+  if (Array.isArray(b.looking)) u.looking = b.looking.filter(x => LOOKING.includes(x));
+  if (Array.isArray(b.going)) u.going = b.going.filter(x => COURSE_IDS.includes(x));
   if (u.name.length < 2) return err(400, "name", "Please enter your full name.");
   await store.set(ukey(u.email), u);
   return json({ ok: true, user: pub(u) });
@@ -231,11 +242,138 @@ async function putData(req, store) {
   return json({ rev: d.rev, updated: d.updated });
 }
 
+
+/* ---- community: discussion spaces and teacher directory ----
+   f/i/<space>  index of the threads of a space (newest activity first)
+   f/t/<id>     one thread with its posts; posts[0] is the opening post
+   f/recent     latest activity across spaces, for the home page */
+const MAX_THREADS = 300, MAX_POSTS = 400, MAX_RECENT = 30;
+const text = (v, n) => String(v == null ? "" : v).replace(/\r\n/g, "\n").replace(/[\u0000-\u0008\u000b-\u001f]/g, " ").replace(/\n{3,}/g, "\n\n").trim().slice(0, n);
+const author = u => ({ e: u.email, name: u.name, country: u.country || "", school: u.school || "", role: u.role || "teacher", admin: isAdminEmail(u.email) });
+/* the email never leaves the server: each post says only whether it is yours */
+const showBy = (by, viewer) => ({ name: by.name, country: by.country, school: by.school, role: by.role, admin: !!by.admin, mine: by.e === viewer.email });
+const newId = () => Date.now().toString(36) + randomBytes(4).toString("hex");
+function rateOk(u) {
+  const hour = Date.now() - 36e5;
+  u.posts = (u.posts || []).filter(t => t > hour);
+  if (u.posts.length >= POSTS_PER_HOUR && !isAdminEmail(u.email)) return false;
+  u.posts.push(Date.now());
+  return true;
+}
+async function touchIndex(store, space, item) {
+  const ix = (await store.get("f/i/" + space)) || { threads: [] };
+  ix.threads = [item, ...ix.threads.filter(t => t.id !== item.id)].slice(0, MAX_THREADS);
+  ix.threads.sort((a, b) => (b.pin ? 1 : 0) - (a.pin ? 1 : 0) || String(b.last).localeCompare(String(a.last)));
+  await store.set("f/i/" + space, ix);
+}
+async function addRecent(store, item) {
+  const r = (await store.get("f/recent")) || { items: [] };
+  r.items = [item, ...r.items.filter(x => !(x.id === item.id && x.kind === item.kind && x.post === item.post))].slice(0, MAX_RECENT);
+  await store.set("f/recent", r);
+}
+const summaryOf = t => ({ id: t.id, space: t.space, title: t.title, by: t.posts[0].by, at: t.at, last: t.posts[t.posts.length - 1].at, n: t.posts.length - 1, pin: !!t.pin, excerpt: t.posts[0].body.slice(0, 160) });
+async function forumList(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const space = new URL(req.url).searchParams.get("space");
+  if (!SPACES.includes(space)) return err(400, "space", "Unknown discussion space.");
+  const ix = (await store.get("f/i/" + space)) || { threads: [] };
+  return json({ threads: ix.threads.map(t => Object.assign({}, t, { by: showBy(t.by, u) })) });
+}
+async function forumCounts(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const all = await Promise.all(SPACES.map(s => store.get("f/i/" + s)));
+  const counts = {};
+  SPACES.forEach((s, i) => { const t = (all[i] || { threads: [] }).threads; counts[s] = { threads: t.length, last: t.length ? t.reduce((m, x) => x.last > m ? x.last : m, "") : null }; });
+  return json({ counts });
+}
+async function forumThread(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const t = await store.get("f/t/" + new URL(req.url).searchParams.get("id"));
+  if (!t) return err(404, "missing", "This discussion no longer exists.");
+  return json({ thread: { id: t.id, space: t.space, title: t.title, at: t.at, pin: !!t.pin, posts: t.posts.map(p => ({ id: p.id, body: p.body, at: p.at, by: showBy(p.by, u) })) }, mod: isAdminEmail(u.email) });
+}
+async function forumNew(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const b = await body(req), space = String(b.space || ""), title = text(b.title, 140), msg = text(b.body, 5000);
+  if (!SPACES.includes(space)) return err(400, "space", "Unknown discussion space.");
+  if (title.length < 4) return err(400, "title", "Please write a title of at least 4 characters.");
+  if (msg.length < 2) return err(400, "body", "Please write your message.");
+  if (!rateOk(u)) return err(429, "rate", "You have posted a lot in the last hour. Please try again later.");
+  await store.set(ukey(u.email), u);
+  const now = new Date().toISOString(), id = newId();
+  const t = { id, space, title, at: now, pin: false, posts: [{ id: "p0", by: author(u), body: msg, at: now }] };
+  await store.set("f/t/" + id, t);
+  await touchIndex(store, space, summaryOf(t));
+  await addRecent(store, { kind: "thread", id, space, title, name: u.name, country: u.country || "", at: now });
+  return json({ ok: true, id });
+}
+async function forumReply(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const b = await body(req), msg = text(b.body, 5000);
+  const t = await store.get("f/t/" + String(b.id || ""));
+  if (!t) return err(404, "missing", "This discussion no longer exists.");
+  if (msg.length < 2) return err(400, "body", "Please write your message.");
+  if (t.posts.length >= MAX_POSTS) return err(400, "full", "This discussion is full. Please start a new one.");
+  if (!rateOk(u)) return err(429, "rate", "You have posted a lot in the last hour. Please try again later.");
+  await store.set(ukey(u.email), u);
+  const now = new Date().toISOString(), pid = "p" + newId();
+  t.posts.push({ id: pid, by: author(u), body: msg, at: now });
+  await store.set("f/t/" + t.id, t);
+  await touchIndex(store, t.space, summaryOf(t));
+  await addRecent(store, { kind: "reply", id: t.id, post: pid, space: t.space, title: t.title, name: u.name, country: u.country || "", at: now });
+  return json({ ok: true, post: pid });
+}
+async function forumDelete(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const b = await body(req), t = await store.get("f/t/" + String(b.id || ""));
+  if (!t) return err(404, "missing", "This discussion no longer exists.");
+  const mod = isAdminEmail(u.email), pid = String(b.post || "p0");
+  const p = t.posts.find(x => x.id === pid);
+  if (!p) return err(404, "missing", "This message no longer exists.");
+  if (!mod && p.by.e !== u.email) return err(403, "forbidden", "You can only delete your own messages.");
+  if (pid === "p0") {
+    if (!mod && t.posts.length > 1) return err(400, "replies", "This discussion already has replies, so only the eMove team can remove it.");
+    await store.del("f/t/" + t.id);
+    const ix = (await store.get("f/i/" + t.space)) || { threads: [] };
+    ix.threads = ix.threads.filter(x => x.id !== t.id); await store.set("f/i/" + t.space, ix);
+  } else {
+    t.posts = t.posts.filter(x => x.id !== pid);
+    await store.set("f/t/" + t.id, t);
+    await touchIndex(store, t.space, summaryOf(t));
+  }
+  const r = (await store.get("f/recent")) || { items: [] };
+  r.items = r.items.filter(x => !(x.id === t.id && (pid === "p0" || x.post === pid))); await store.set("f/recent", r);
+  return json({ ok: true });
+}
+async function forumPin(req, store) {
+  const a = await adminOnly(req, store);
+  if (!a) return err(403, "forbidden", "Only the eMove team can pin discussions.");
+  const b = await body(req), t = await store.get("f/t/" + String(b.id || ""));
+  if (!t) return err(404, "missing", "This discussion no longer exists.");
+  t.pin = !t.pin; await store.set("f/t/" + t.id, t); await touchIndex(store, t.space, summaryOf(t));
+  return json({ ok: true, pin: t.pin });
+}
+async function forumRecent(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  return json({ items: ((await store.get("f/recent")) || { items: [] }).items });
+}
+/* teacher directory: only approved members who chose to appear; the email only if they chose to share it */
+async function members(req, store) {
+  const [u, bad] = await activeUser(req, store); if (bad) return bad;
+  const all = (await Promise.all((await store.keys("u/")).map(k => store.get(k)))).filter(m => m && m.directory && (m.status === "approved" || isAdminEmail(m.email)));
+  const list = all.map(m => ({ name: m.name, school: m.school, country: m.country, role: m.role, stage: m.stage, subject: m.subject, interests: m.interests || [], bio: m.bio || "", looking: m.looking || [], going: m.going || [], email: m.showEmail ? m.email : null, me: m.email === u.email, team: isAdminEmail(m.email) }));
+  list.sort((a, b) => (b.me ? 1 : 0) - (a.me ? 1 : 0) || a.name.localeCompare(b.name));
+  return json({ members: list, total: all.length });
+}
+
 const ROUTES = {
   "GET ping": () => json({ ok: true, app: "emove-profe" }),
   "POST register": register, "POST login": login, "GET me": me, "POST profile": profile, "POST password": changePass,
   "GET admin/users": adminUsers, "POST admin/user": adminUser,
-  "GET data": getData, "PUT data": putData
+  "GET data": getData, "PUT data": putData,
+  "GET forum": forumList, "GET forum/counts": forumCounts, "GET forum/thread": forumThread, "GET forum/recent": forumRecent,
+  "POST forum/thread": forumNew, "POST forum/reply": forumReply, "POST forum/delete": forumDelete, "POST forum/pin": forumPin,
+  "GET members": members
 };
 export default async function handler(req) {
   const p = new URL(req.url).pathname.replace(/^\/api\/?/, "").replace(/\/$/, "");

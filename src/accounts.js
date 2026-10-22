@@ -48,9 +48,9 @@ function signOut() { authSave(null); USER = null; location.hash = ""; authScreen
 
 /* ---------- sign in / request access ---------- */
 const SELL = [
-  ["academy", "Erasmus+ from scratch", "A free interactive microcourse: routes, money, planning and impact."],
+  ["academy", "Learn", "The free Erasmus+ microcourse and the full syllabus of every eMove course."],
   ["book", "Classroom resources", "Ready-to-use activities, routines and templates for every stage."],
-  ["plane", "Courses abroad", "Discover eMove courses you can fund with an Erasmus+ grant."],
+  ["chat", "Community", "Discussion spaces and a directory to find colleagues and project partners."],
   ["cert", "Certificate", "Finish the microcourse and download your certificate of completion."]
 ];
 function authScreen(next, notice) {
@@ -126,7 +126,7 @@ function mergeState(a, b) {
   if (!b) return a;
   const m = Object.assign(freshState(), a);
   m.xp = Math.max(a.xp || 0, b.xp || 0);
-  for (const k of ["done", "units", "clicks"]) m[k] = Object.assign({}, b[k] || {}, a[k] || {});
+  for (const k of ["done", "units", "clicks", "syl"]) m[k] = Object.assign({}, b[k] || {}, a[k] || {});
   m.notes = Object.assign({}, b.notes || {}); for (const [k, v] of Object.entries(a.notes || {})) if (v) m.notes[k] = v;
   m.favs = [...new Set([...(a.favs || []), ...(b.favs || [])])];
   m.days = [...new Set([...(a.days || []), ...(b.days || [])])].sort();
@@ -186,6 +186,7 @@ ROUTES.admin = async (v) => {
         <div class="user-h"><div><b>${esc(u.name)}</b> ${u.admin ? chip("super-admin", "#101C38") : ""}<span class="muted">${esc(u.email)}</span></div><span class="status ${u.status}">${u.status}</span></div>
         <dl><div><dt>School</dt><dd>${esc(u.school)}</dd></div><div><dt>Country</dt><dd>${esc(u.country)}</dd></div><div><dt>Role</dt><dd>${esc(ROLE_NAME[u.role] || u.role)}</dd></div><div><dt>Stage</dt><dd>${esc(u.stage || "–")}${u.subject ? " · " + esc(u.subject) : ""}</dd></div>
         <div><dt>Interests</dt><dd>${(u.interests || []).map(i => esc(pathwayById(i).name)).join(", ") || "–"}</dd></div><div><dt>News</dt><dd>${u.news ? "Yes" : "No"}</dd></div>
+        <div><dt>Community</dt><dd>${u.directory ? "In the directory" : "Not in the directory"}${(u.going || []).length ? " · interested in " + u.going.map(id => esc((courseById(id) || {}).title || id)).join(", ") : ""}</dd></div>
         <div><dt>Requested</dt><dd>${fmtDate(u.created)}</dd></div><div><dt>Last sign-in</dt><dd>${fmtDate(u.lastLogin)}</dd></div>
         <div><dt>Progress</dt><dd>${u.progress ? `${u.progress.units}/${u.progress.of} units · ${u.progress.xp} XP${u.progress.quiz ? ` · quiz ${u.progress.quiz.score}/${u.progress.quiz.of}` : ""}${u.progress.clicks ? ` · opened ${u.progress.clicks} eMove course${u.progress.clicks > 1 ? "s" : ""}` : ""}` : "Not started"}</dd></div></dl>
         <div class="row gap">${u.status !== "approved" ? `<button class="btn primary sm" data-a="approve">${icon("check")} Approve</button>` : ""}${u.status !== "rejected" && !u.admin ? `<button class="btn sm" data-a="reject">Reject</button>` : ""}

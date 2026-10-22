@@ -37,12 +37,16 @@
   ],
   "shortcuts": [
     {
-      "name": "Academy",
-      "url": "./#academy"
+      "name": "Learn",
+      "url": "./#learn"
     },
     {
       "name": "Resources",
       "url": "./#resources"
+    },
+    {
+      "name": "Community",
+      "url": "./#community"
     }
   ]
 }

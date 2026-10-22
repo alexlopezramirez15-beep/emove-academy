@@ -118,6 +118,126 @@ const RESOURCES = [
     materials: ["This template, printed or copied into your notes"],
     assessment: "Compare the plan with what happened two months after the mobility.",
     variation: "Coordinators can collect all plans to write the school's final report."
+  },
+  /* ---------- resources made for each eMove course (connected to a day of its syllabus) ---------- */
+  {
+    id: "mission-builder", title: "Mission builder: from exercise to mission", pathway: "future", type: "Template", stages: ["All stages"], minutes: 20,
+    summary: "Five questions that turn any worksheet into a mission students understand and want to complete.",
+    objective: "Teachers redesign an ordinary task so it has a purpose, a challenge and a clear finish line, without changing the learning objective.",
+    steps: ["Write the learning objective of the task in one sentence. It must not change.", "Purpose: what problem, mystery or goal gives the task a reason to exist? Write it as one line to read aloud.", "Challenge: add one constraint (time, resources, a rule) that makes it interesting, not impossible.", "Feedback: how will teams know straight away that they are on track (a code, a check, a peer)?", "Finish line: what does 'mission complete' look like and how is it celebrated?", "Test it with a colleague in five minutes and simplify anything that needs explaining twice."],
+    materials: ["One worksheet or exercise you already use", "This template"],
+    assessment: "Compare participation and completion with the last time you used the worksheet.",
+    variation: "Let teams choose between two missions with the same objective."
+  },
+  {
+    id: "progress-map", title: "A progress map without leaderboards", pathway: "future", type: "Template", stages: ["Primary", "Lower secondary", "Upper secondary"], minutes: 30,
+    summary: "Make progress visible for the whole class with a shared map, without ranking students against each other.",
+    objective: "Students see how far they have come and work towards a shared goal instead of competing.",
+    steps: ["Draw a map with 5–8 stops: each stop is a learning milestone of the unit.", "Decide what unlocks each stop (a task, a quiz, a product) and write it next to the stop.", "Move one class token when the whole class reaches a milestone, not individual names.", "Give each student a private mini-map to track their own route.", "At each stop, take two minutes to celebrate and ask: what helped us get here?", "At the last stop, unlock something the class chose at the start."],
+    materials: ["A large poster or a slide", "A class token", "Printed mini-maps"],
+    assessment: "Use the private mini-maps to spot who needs support before the next stop.",
+    variation: "Add optional side quests for students who want extra challenge."
+  },
+  {
+    id: "prompt-builder", title: "The five-part prompt builder", pathway: "future", type: "Template", stages: ["All stages"], minutes: 15,
+    summary: "Role, context, task, constraints and format: a simple frame for better results from AI tools.",
+    objective: "Teachers write prompts that give useful, accurate and age-appropriate material, and improve them by iterating.",
+    steps: ["Role: tell the tool who it should act as (e.g. 'an experienced primary science teacher').", "Context: your students' age, level, needs and what they already know.", "Task: exactly what you want (a story, five questions, a rubric, three versions of a text).", "Constraints: length, vocabulary, what to avoid, curriculum links.", "Format: a table, a list, a script, a worksheet layout.", "Read the answer critically, then ask one follow-up to improve it. Never use the first version without checking it."],
+    materials: ["An AI tool allowed by your school", "This template"],
+    assessment: "Use the checklist: accurate, appropriate, useful for my class? If one is no, iterate.",
+    variation: "Build a shared prompt bank with your department."
+  },
+  {
+    id: "ai-agreement", title: "Classroom AI agreement", pathway: "future", type: "Template", stages: ["Lower secondary", "Upper secondary", "Vocational (VET)", "Adult education"], minutes: 45,
+    summary: "Students and teacher agree together when AI can help, when it can't, and how to say they used it.",
+    objective: "Students learn to use AI responsibly and keep their own thinking at the centre of their work.",
+    steps: ["Ask students how they already use AI. Collect answers without judging.", "Sort tasks into three columns: AI can help, AI with care, no AI. Discuss the borderline cases.", "Agree on how to declare AI use in a piece of work (one sentence at the end).", "Add one rule about privacy: no personal data in AI tools.", "Write the agreement on one page and everyone signs it.", "Review it after a month: what worked, what needs to change?"],
+    materials: ["Sticky notes in three colours", "A large sheet for the final agreement"],
+    assessment: "Check that declared AI use matches the agreement in the next assignment.",
+    variation: "With younger students, focus on one rule: 'AI suggests, I decide'."
+  },
+  {
+    id: "cer-template", title: "Claim, evidence, reasoning", pathway: "excellence", type: "Template", stages: ["Primary", "Lower secondary", "Upper secondary", "Vocational (VET)"], minutes: 30,
+    summary: "A three-box frame that helps students move from opinion to an argument they can defend.",
+    objective: "Students support a claim with evidence and explain how the evidence supports it.",
+    steps: ["Give a question with more than one possible answer (Is this source reliable? Which material is best?).", "Claim: students write their answer in one sentence.", "Evidence: they list two or three facts, data or quotes that support it.", "Reasoning: they explain why the evidence supports the claim ('This shows that… because…').", "Pairs swap and ask one 'How do you know?' question.", "Students revise the claim if the evidence is weak. Changing your mind counts as good thinking."],
+    materials: ["The three-box frame on paper or a slide", "Sources or data for the question"],
+    assessment: "Assess the reasoning box: does it connect evidence and claim, or just repeat them?",
+    variation: "Add a fourth box: 'What would change my mind?'"
+  },
+  {
+    id: "decision-matrix", title: "Decision matrix for real dilemmas", pathway: "excellence", type: "Activity", stages: ["Lower secondary", "Upper secondary", "Vocational (VET)", "Adult education"], minutes: 50,
+    summary: "Teams compare options against criteria they choose, decide, and defend their reasoning.",
+    objective: "Students make a defensible decision when there is no single correct answer.",
+    steps: ["Present a dilemma connected to your subject (where to build a park, which energy source, what a character should do).", "Teams list three options.", "They choose four criteria and give each a weight from 1 to 3.", "They score every option against every criterion and add up the totals.", "They look at the result: do they agree with it? If not, which criterion is missing?", "Each team presents its decision and the strongest argument against it."],
+    materials: ["A matrix grid", "Information cards for the dilemma"],
+    assessment: "Look for justified weights and honest counter-arguments, not the 'right' option.",
+    variation: "Give each team member a different stakeholder role."
+  },
+  {
+    id: "barrier-hunt", title: "Barrier hunt: audit one activity", pathway: "inclusion", type: "Template", stages: ["All stages"], minutes: 25,
+    summary: "A checklist to find the invisible barriers inside an ordinary classroom activity.",
+    objective: "Teachers change what is around the learner before asking the learner to change.",
+    steps: ["Pick one activity you will teach this week.", "Instructions: are they short, visual and available after you say them?", "Reading and writing: could a student show the learning without long texts?", "Attention and time: is there a break, a timer, a clear first step?", "Environment: noise, light, visual overload, where students sit.", "Participation: can every student take part without being put on the spot?", "Change one thing for everyone, then teach the activity and notice who joined in."],
+    materials: ["The activity you want to audit", "This checklist"],
+    assessment: "Note which students participated more after the change.",
+    variation: "Do the hunt in pairs with a colleague from another subject."
+  },
+  {
+    id: "scaffold-ladder", title: "The scaffolding ladder", pathway: "inclusion", type: "Template", stages: ["All stages"], minutes: 20,
+    summary: "Plan support in steps, from the lightest to the strongest, and remove it as students grow.",
+    objective: "Every student gets the smallest support they need to move forward, with high expectations for all.",
+    steps: ["Write the task at the top of the ladder: the same goal for everyone.", "Step 1 (light): a checklist or success criteria.", "Step 2: a worked example or a model answer.", "Step 3: the task in chunks with a visual organiser.", "Step 4 (strong): guided practice with you or a peer.", "Students choose or are guided to a step, and try to climb down next time."],
+    materials: ["The ladder template", "One example and one organiser for the task"],
+    assessment: "Record which step each student used and aim for a lighter step next time.",
+    variation: "Let students design the ladder for a younger class."
+  },
+  {
+    id: "hundred-metre", title: "The 100-metre classroom", pathway: "sustainability", type: "Activity", stages: ["All stages"], minutes: 50,
+    summary: "Discover how many learning opportunities fit in a circle of 100 metres around your school.",
+    objective: "Students and teachers see the school surroundings as a resource for every subject.",
+    steps: ["Agree the boundaries and safety rules before going out.", "Teams receive a map with a 100-metre circle around the school.", "Each team has 20 minutes to find learning in five subjects (numbers, materials, signs, history, living things).", "They photograph or sketch each find and note the subject.", "Back inside, teams share and the class builds a map of learning spots.", "Choose one spot for a lesson next week."],
+    materials: ["Printed map with the circle", "Clipboards", "A phone or tablet per team (optional)"],
+    assessment: "Count how many subjects each team connected and ask them to explain one find.",
+    variation: "Repeat it in another season and compare what changed."
+  },
+  {
+    id: "outdoor-mission", title: "Outdoor mission card", pathway: "sustainability", type: "Template", stages: ["Primary", "Lower secondary", "Upper secondary"], minutes: 40,
+    summary: "A one-card format to turn any outdoor visit into an inquiry with a real learning objective.",
+    objective: "Students go outside to investigate a question, collect evidence and bring the learning back to class.",
+    steps: ["Question: one question the place can answer ('Where is the warmest spot in the playground and why?').", "Role: explorers, researchers, mappers or reporters.", "Collect: what evidence they bring back (measurements, photos, sketches, interviews).", "Boundaries: where they can go, time limit and meeting point.", "Bring it back: how they will share the answer (map, short talk, poster).", "Reflect: one thing they discovered that they didn't expect."],
+    materials: ["Printed mission cards", "Measuring tools or phones, depending on the mission"],
+    assessment: "Assess the evidence collected and the explanation, not the outing itself.",
+    variation: "Students write mission cards for another class."
+  },
+  {
+    id: "stop-simplify", title: "Stop, simplify, delegate, protect", pathway: "wellbeing", type: "Template", stages: ["All stages"], minutes: 20,
+    summary: "A quick workload audit to decide what deserves your energy this term.",
+    objective: "Teachers reduce unnecessary workload and protect the tasks that matter most.",
+    steps: ["List everything you do in a normal week, including the invisible tasks.", "Stop: what could you stop doing without harming students?", "Simplify: what could take half the time (shorter feedback, templates, shared plans)?", "Delegate or share: what could students, colleagues or a team do?", "Protect: which two tasks give you and your students the most value? Block time for them.", "Choose one change for next week and check how it went."],
+    materials: ["This template", "Your weekly timetable"],
+    assessment: "After two weeks, note the time and energy you gained.",
+    variation: "Do it as a department to find shared savings."
+  },
+  {
+    id: "bad-day-toolkit", title: "My bad day toolkit", pathway: "wellbeing", type: "Template", stages: ["All stages"], minutes: 15,
+    summary: "Not a perfect-day routine: a short list of what helps you recover when things go wrong.",
+    objective: "Teachers prepare realistic strategies for difficult days before they happen.",
+    steps: ["Write three signs that tell you a day is going badly (body, thoughts, behaviour).", "Two-minute resets you can do at school: breathing, a walk, water, a window.", "One person you can talk to and how you will ask for help.", "One thing you will not do on a bad day (answer emails at night, mark everything).", "One small thing that reminds you why you teach.", "Keep the card somewhere you will see it and update it each term."],
+    materials: ["An index card or a note on your phone"],
+    assessment: "Use it on the next difficult day and note what helped most.",
+    variation: "Create a staff room version together with colleagues."
   }
 ];
 const resById = id => RESOURCES.find(r => r.id === id);
+/* the eMove course each resource prepares for, and the day of its syllabus it connects to */
+const RES_COURSE = {
+  "mission-escape": ["game-on", 2], "mission-builder": ["game-on", 2], "progress-map": ["game-on", 4],
+  "ai-feedback-check": ["ai-teacher", 4], "prompt-builder": ["ai-teacher", 2], "ai-agreement": ["ai-teacher", 4],
+  "think-routine": ["think", 1], "exit-ticket": ["think", 5], "cer-template": ["think", 2], "decision-matrix": ["think", 4],
+  "udl-menu": ["shine", 3], "strengths-cards": ["shine", 5], "barrier-hunt": ["shine", 2], "scaffold-ladder": ["shine", 4],
+  "school-grounds": ["outside", 2], "waste-audit": ["outside", 3], "hundred-metre": ["outside", 1], "outdoor-mission": ["outside", 3],
+  "staff-wellbeing": ["happy", 1], "calm-corner": ["happy", 4], "stop-simplify": ["happy", 2], "bad-day-toolkit": ["happy", 4]
+};
+RESOURCES.forEach(r => { const c = RES_COURSE[r.id]; if (c) { r.course = c[0]; r.day = c[1]; } });
+const resForCourse = (cid, day) => RESOURCES.filter(r => r.course === cid && (!day || r.day === day));

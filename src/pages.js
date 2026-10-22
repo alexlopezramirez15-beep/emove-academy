@@ -1,4 +1,4 @@
-/* ============ HOME, RESOURCES, eMove COURSES, PROFILE ============ */
+/* ============ HOME, RESOURCES, PROFILE ============ */
 ROUTES.home = v => {
   const first = (USER.name || "").split(" ")[0], lv = level(), p = courseProgress(), nu = nextUnit();
   const fav = S.favs.map(resById).filter(Boolean);
@@ -12,10 +12,14 @@ ROUTES.home = v => {
       <a class="btn primary" href="${nu ? "#unit/" + nu.id : S.quiz && S.quiz.pass ? "#cert/" + COURSE().id : "#quiz"}">${nu ? (p ? "Continue" : "Start") : S.quiz && S.quiz.pass ? "Certificate" : "Final quiz"} ${icon("arrow")}</a></section>
     <div class="grid2">
       <section class="card deadline"><span class="eyebrow">${icon("calendar")} Erasmus+ calendar</span><h3>Main KA1 deadline: usually in February</h3><p class="muted">Short-term projects (KA122) and accredited projects (KA121) usually apply in February. Some countries open a second KA122 round in the autumn. Check your National Agency's dates.</p><a class="link" href="#unit/u2">Which route is yours? ${icon("arrow")}</a></section>
-      <section class="card"><span class="eyebrow">${icon("plane")} Course for you</span><h3>${esc(c.title)}</h3><p class="muted">${esc(c.sub)}</p><p class="small">${icon("pin")} ${esc(c.city)} · ${esc(c.dates)} · ${esc(c.price)}</p><a class="link" href="#courses">See all eMove courses ${icon("arrow")}</a></section>
+      <section class="card"><span class="eyebrow">${icon("plane")} Course for you</span><h3>${esc(c.title)}</h3><p class="muted">${esc(c.sub)}</p><p class="small">${icon("pin")} ${esc(c.city)} · ${esc(c.dates)} · ${esc(c.price)}</p><a class="link" href="#course/${c.id}">Syllabus, resources and community ${icon("arrow")}</a></section>
     </div>
     <div class="sec-row"><h2 class="sec-t">${fav.length ? "Your saved resources" : "Resources for your class"}</h2><a class="link" href="#resources">All resources ${icon("arrow")}</a></div>
-    <div class="grid3">${(fav.length ? fav.slice(0, 3) : forYou).map(resCard).join("")}</div>`;
+    <div class="grid3">${(fav.length ? fav.slice(0, 3) : forYou).map(resCard).join("")}</div>
+    <div class="sec-row"><h2 class="sec-t">From the community</h2><a class="link" href="#community">Community ${icon("arrow")}</a></div>
+    <section class="card" id="hrec"><p class="muted">Loading…</p></section>`;
+  if (PREVIEW) { $("#hrec").innerHTML = `<p class="muted">Discussions and the teacher directory open when you sign in.</p>`; return; }
+  api("forum/recent").then(r => { const el = $("#hrec"); if (!el) return; el.innerHTML = r.ok && r.data.items.length ? recentList(r.data.items.slice(0, 4)) : `<p class="muted">No discussions yet. <a href="#space/staffroom">Introduce yourself in the staff room</a> and meet teachers from all over Europe.</p>`; });
 };
 
 /* ---------- resources ---------- */
@@ -57,25 +61,13 @@ ROUTES.res = (v, [id]) => {
     <div class="grid2"><section><h2>Materials</h2><ul>${r.materials.map(m => `<li>${esc(m)}</li>`).join("")}</ul></section><section><h2>Assessment</h2><p>${esc(r.assessment)}</p></section></div>
     ${r.variation ? `<section class="tip">${icon("spark")}<p><b>Variation.</b> ${esc(r.variation)}</p></section>` : ""}
     <p class="print-only small">EMOVE Profe · eMove Academy · ${EMOVE_SITE.replace("https://", "")}</p></article>
+    ${r.course ? `<a class="card from-course no-print" href="#course/${r.course}/syllabus/${r.day}" style="--c:${p.color}">${icon("list")}<div class="grow"><span class="eyebrow">From the syllabus of ${esc(courseById(r.course).title)}</span><b>Day ${r.day} · ${esc(SYLLABUS[r.course].days[r.day - 1].title)}</b><span class="muted">${esc(SYLLABUS[r.course].days[r.day - 1].sub)}</span></div>${icon("arrow")}</a>` : ""}
     <div class="no-print">${courseCTA(r.pathway, coursesFor(r.pathway).length ? "This resource comes from the " + p.name + " pathway. Live it in a full course with teachers from all over Europe." : "We design tailor-made courses on this pathway for schools and groups.")}</div>`;
   $("#fav").onclick = () => { const i = S.favs.indexOf(r.id); i < 0 ? S.favs.push(r.id) : S.favs.splice(i, 1); save(); toast(i < 0 ? "Saved to your resources" : "Removed from saved"); route(); };
 };
 
-/* ---------- eMove courses ---------- */
-ROUTES.courses = v => {
-  v.innerHTML = `<div class="page-h"><h1>${icon("plane")} eMove courses</h1><p class="muted">Five-day courses in Spain, taught in English, in small international groups. Erasmus+ compatible: your school can fund them with an Erasmus+ grant.</p></div>
-    <section class="card fund"><div>${icon("wallet", "big")}</div><div class="grow"><h3>How do I pay for it with Erasmus+?</h3><p class="muted">Your school applies to its National Agency (KA122 or KA121). The grant can cover the course fee, travel and daily costs. Learn the whole process in the free microcourse.</p></div><a class="btn" href="#academy">Open the microcourse ${icon("arrow")}</a></section>
-    <h2 class="sec-t">Summer 2027 · registration open</h2>
-    <div class="grid3">${EMOVE_COURSES.map(c => { const p = pathwayById(c.pathway); return `<article class="card course" style="--c:${p.color}"><span class="chip" style="--c:${p.color}">${icon(p.icon)} ${esc(p.name)}</span><h3>${esc(c.title)}</h3><p class="muted">${esc(c.sub)}</p>
-      <ul class="facts"><li>${icon("pin")} ${esc(c.city)}, Spain</li><li>${icon("calendar")} ${esc(c.dates)}</li><li>${icon("clock")} ${esc(c.days)}</li><li>${icon("wallet")} ${esc(c.price)} · Erasmus+ compatible</li></ul>
-      <a class="btn primary wide" href="${c.url}" target="_blank" rel="noopener" data-course="${c.id}">View course ${icon("external")}</a></article>`; }).join("")}</div>
-    <section class="card schools"><div class="grow"><h3>${esc(FOR_SCHOOLS.title)}</h3><p class="muted">${esc(FOR_SCHOOLS.sub)}. Ideal for whole teams and for the European Citizenship and Leadership pathways.</p></div><a class="btn" href="${FOR_SCHOOLS.url}" target="_blank" rel="noopener" data-course="schools">For schools ${icon("external")}</a></section>
-    <h2 class="sec-t">Seven pathways</h2><div class="pathways">${PATHWAYS.map(p => `<a class="pw" href="#resources" data-pw="${p.id}" style="--c:${p.color}">${icon(p.icon)}<b>${p.name}</b><span>${esc(p.line)}</span><em>${coursesFor(p.id).length ? coursesFor(p.id).length + " course" + (coursesFor(p.id).length > 1 ? "s" : "") : "Tailor-made"} · ${RESOURCES.filter(r => r.pathway === p.id).length} resources</em></a>`).join("")}</div>`;
-  $$("[data-pw]").forEach(a => a.onclick = () => { RES_F.p = a.dataset.pw; });
-};
-
 /* ---------- profile ---------- */
-ROUTES.profile = v => {
+ROUTES.profile = (v, [part]) => {
   const lv = level(), notes = Object.entries(S.notes).filter(([, t]) => t);
   const qOf = id => { const [u, i] = id.split("-"), un = unitById(u); return un && un.activities[+i] ? un.activities[+i].q : id; };
   v.innerHTML = `<div class="page-h"><h1>${icon("user")} ${esc(USER.name)}</h1><p class="muted">${esc([USER.school, USER.country].filter(Boolean).join(" · "))}</p></div>
@@ -93,7 +85,15 @@ ROUTES.profile = v => {
       <label class="check"><input type="checkbox" name="news" ${USER.news ? "checked" : ""}><span>Send me news about Erasmus+ deadlines and eMove courses.</span></label>
       <button class="btn primary">Save details</button></form></section>
     <section class="card"><h2>Password</h2><form id="pw" class="form"><label>Current password<input type="password" name="old" autocomplete="current-password"></label><label>New password<input type="password" name="password" minlength="8" autocomplete="new-password"><small>At least 8 characters.</small></label><p class="err" id="pwe"></p><button class="btn">Change password</button></form>
-    <hr><button class="btn danger" id="out">${icon("logout")} Sign out</button></section></div>`}`;
+    <hr><button class="btn danger" id="out">${icon("logout")} Sign out</button></section></div>
+    <section class="card" id="community-profile"><h2>${icon("users")} Community profile</h2><p class="muted">Choose what other approved teachers can see in the directory and in the course spaces.</p><form id="cf" class="form">
+      <label class="check"><input type="checkbox" name="directory" ${USER.directory ? "checked" : ""}><span><b>Show me in the teacher directory</b> (name, school, country, role, subject and what you write below)</span></label>
+      <label class="check"><input type="checkbox" name="showEmail" ${USER.showEmail ? "checked" : ""}><span>Show my email in the directory so teachers can contact me</span></label>
+      <label>A few words about you<textarea name="bio" rows="3" maxlength="300" placeholder="I teach English in a primary school near Porto. We want to start our first Erasmus+ project.">${esc(USER.bio || "")}</textarea></label>
+      <fieldset><legend>I'm looking for</legend><div class="checks">${LOOKING.map(([k, t]) => `<label class="check"><input type="checkbox" name="looking" value="${k}" ${(USER.looking || []).includes(k) ? "checked" : ""}><span>${t}</span></label>`).join("")}</div></fieldset>
+      <fieldset><legend>eMove courses I'm interested in</legend><div class="checks">${EMOVE_COURSES.map(c => `<label class="check"><input type="checkbox" name="going" value="${c.id}" ${(USER.going || []).includes(c.id) ? "checked" : ""}><span>${esc(c.title)}</span></label>`).join("")}</div></fieldset>
+      <button class="btn primary">Save community profile</button></form></section>`}`;
+  if (part === "community" && $("#community-profile")) setTimeout(() => $("#community-profile").scrollIntoView({ behavior: "smooth" }), 60);
   if (PREVIEW) return;
   $("#pf").onsubmit = async e => {
     e.preventDefault(); const f = new FormData(e.target);
@@ -109,4 +109,10 @@ ROUTES.profile = v => {
     AUTH.token = r.data.token; authSave(AUTH); e.target.reset(); $("#pwe").textContent = ""; toast("Password changed");
   };
   $("#out").onclick = signOut;
+  $("#cf").onsubmit = async e => {
+    e.preventDefault(); const f = new FormData(e.target);
+    const r = await api("profile", { directory: !!f.get("directory"), showEmail: !!f.get("showEmail"), bio: f.get("bio") || "", looking: f.getAll("looking"), going: f.getAll("going") });
+    if (!r.ok) return toast(r.data.message || "Could not save.");
+    USER = r.data.user; AUTH.user = USER; authSave(AUTH); toast(USER.directory ? "Saved. You appear in the teacher directory." : "Saved. You don't appear in the directory.");
+  };
 };

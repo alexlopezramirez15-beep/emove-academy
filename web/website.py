@@ -124,6 +124,18 @@ RES_ES = {
     "europe-map": ("Nuestra clase en el mapa de Europa", "El alumnado traza las conexiones europeas de su vida: comida, familia, música, viajes, productos."),
     "change-canvas": ("Plan de cambio en una página para equipos directivos", "Una plantilla de una página para planificar un cambio en tu centro, de la necesidad a la evidencia."),
     "mobility-plan": ("Mi plan de movilidad Erasmus+", "Una plantilla para preparar una movilidad: objetivos, plan de difusión y evidencias de impacto."),
+    "mission-builder": ("Constructor de misiones: del ejercicio a la misión", "Cinco preguntas que convierten cualquier ficha en una misión que el alumnado entiende y quiere completar."),
+    "progress-map": ("Un mapa de progreso sin rankings", "Haz visible el progreso de toda la clase con un mapa compartido, sin comparar al alumnado entre sí."),
+    "prompt-builder": ("El constructor de prompts en cinco partes", "Rol, contexto, tarea, límites y formato: un esquema sencillo para obtener mejores resultados de la IA."),
+    "ai-agreement": ("Acuerdo de aula sobre la IA", "Alumnado y docente acuerdan cuándo la IA puede ayudar, cuándo no y cómo declarar su uso."),
+    "cer-template": ("Afirmación, evidencia, razonamiento", "Un esquema de tres casillas para pasar de la opinión a un argumento que se pueda defender."),
+    "decision-matrix": ("Matriz de decisión para dilemas reales", "Los equipos comparan opciones con criterios que eligen ellos, deciden y defienden su razonamiento."),
+    "barrier-hunt": ("Caza de barreras: revisa una actividad", "Una lista de comprobación para encontrar las barreras invisibles de una actividad corriente."),
+    "scaffold-ladder": ("La escalera de andamiaje", "Planifica los apoyos por pasos, del más ligero al más fuerte, y retíralos a medida que el alumnado avanza."),
+    "hundred-metre": ("El aula de 100 metros", "Descubre cuántas oportunidades de aprendizaje caben en un círculo de 100 metros alrededor de tu centro."),
+    "outdoor-mission": ("Tarjeta de misión al aire libre", "Un formato de una tarjeta para convertir cualquier salida en una indagación con un objetivo real."),
+    "stop-simplify": ("Parar, simplificar, delegar, proteger", "Una auditoría rápida de tu carga de trabajo para decidir qué merece tu energía este trimestre."),
+    "bad-day-toolkit": ("Mi kit para los días malos", "No es una rutina de día perfecto: una lista breve de lo que te ayuda a recuperarte cuando algo sale mal."),
 }
 COURSE_ES = {
     "game-on": "Convierte el aprendizaje en retos, misiones y experiencias en las que el alumnado quiera participar",
@@ -167,7 +179,7 @@ def landing(d, L):
     app_note = f'<p class="app-note">{ic("globe")} La plataforma de momento está en inglés.</p>' if es else ""
 
     # ---------- header ----------
-    nav = [("erasmus", t("Erasmus+", "Erasmus+")), ("course", t("Microcourse", "Microcurso")), ("resources", t("Resources", "Recursos")), ("courses", t("Courses abroad", "Cursos")), ("faq", t("FAQ", "Preguntas"))]
+    nav = [("erasmus", t("Erasmus+", "Erasmus+")), ("course", t("Microcourse", "Microcurso")), ("resources", t("Resources", "Recursos")), ("courses", t("Courses", "Cursos")), ("community", t("Community", "Comunidad")), ("faq", t("FAQ", "Preguntas"))]
     header = f"""<header class="top"><a href="#top" class="brand" aria-label="{SITE_NAME}">{logo()}</a>
 <nav class="snav">{"".join(f'<a href="#{k}">{E(v)}</a>' for k, v in nav)}</nav>
 <div class="sact"><div class="lang" role="group" aria-label="{t("Language", "Idioma")}"><button type="button" data-lang="en" class="{"on" if not es else ""}" aria-pressed="{str(not es).lower()}">EN</button><button type="button" data-lang="es" class="{"on" if es else ""}" aria-pressed="{str(es).lower()}">ES</button></div>
@@ -179,7 +191,7 @@ def landing(d, L):
 <h1>{t("Learn how Erasmus+ can fund your training abroad.", "Descubre cómo Erasmus+ puede pagar tu formación en el extranjero.")}</h1>
 <p>{t("An interactive microcourse, ready-to-use classroom resources and clear answers for European teachers. Free and at your own pace.", "Un microcurso interactivo, recursos listos para el aula y respuestas claras para el profesorado europeo. Gratis y a tu ritmo.")}</p>
 <div class="row gap"><a class="btn primary lg" href="{req}">{t("Request free access", "Solicita acceso gratis")} {ic("arrow")}</a><a class="btn lg ghost" href="#finder">{t("Find your route", "Encuentra tu vía")}</a></div>
-<ul class="ticks"><li>{ic("check")} {len(course["units"])} {t("interactive units", "unidades interactivas")}</li><li>{ic("check")} {len(res)} {t("classroom resources", "recursos de aula")}</li><li>{ic("check")} {t("Certificate", "Certificado")}</li></ul></div>
+<ul class="ticks"><li>{ic("check")} {len(course["units"])} {t("interactive units", "unidades interactivas")}</li><li>{ic("check")} {len(res)} {t("classroom resources", "recursos de aula")}</li><li>{ic("check")} {t("Full syllabus of every course", "Temario completo de cada curso")}</li><li>{ic("check")} {t("Community of teachers", "Comunidad de docentes")}</li></ul></div>
 <div class="hero-card reveal" data-quiz="hero"><div class="hc-top">{ic("quiz")} <b>{t("Try it: a 10-second question", "Pruébalo: una pregunta de 10 segundos")}</b></div>
 <p class="hc-q-t">{t("Your school has never done Erasmus+. Four teachers want a course next summer. Which route fits best?", "Tu centro nunca ha hecho Erasmus+. Cuatro docentes quieren hacer un curso el próximo verano. ¿Qué vía encaja mejor?")}</p>
 {"".join(f'<button type="button" class="hc-o" data-ok="{1 if ok else 0}">{E(txt)}</button>' for _, txt, ok in hero_opts)}
@@ -255,9 +267,19 @@ def landing(d, L):
     cchips = f'<button type="button" class="fchip on" data-f="all">{t("All", "Todos")}</button>' + "".join(f'<button type="button" class="fchip" data-f="{p["id"]}" style="--c:{p["color"]}">{ic(p["icon"])} {E(pname(p["id"]))}</button>' for p in cused)
     ccards = "".join(f'''<a class="scourse" data-p="{c["pathway"]}" href="{E(c["url"])}" target="_blank" rel="noopener" style="--c:{pws[c["pathway"]]["color"]}"><span class="chip" style="--c:{pws[c["pathway"]]["color"]}">{E(pname(c["pathway"]))}</span><b>{E(c["title"])}</b><span>{E(COURSE_ES[c["id"]] if es else c["sub"])}</span><small>{ic("pin")} {E(c["city"])} · {E(dates(c["dates"]))}</small><small>{ic("clock")} {t("5 days · 25 hours", "5 días · 25 horas")} · {E(c["price"])}</small></a>''' for c in courses)
     courses_sec = f"""<section class="wrap" id="courses"><div class="sec-h reveal"><span class="eyebrow">{ic("plane")} eMove Academy</span><h2>{t("Courses abroad · Summer 2027", "Cursos en el extranjero · Verano 2027")}</h2>
-<p class="lead">{t("Five days in Spain, taught in English in small international groups, designed to fit Erasmus+ projects.", "Cinco días en España, en inglés y en grupos internacionales pequeños, pensados para proyectos Erasmus+.")}</p></div>
+<p class="lead">{t("Five days in Spain, taught in English in small international groups, designed to fit Erasmus+ projects. Inside the platform, every course has its full day-by-day syllabus, resources to try now and a space to meet the teachers who are going.", "Cinco días en España, en inglés y en grupos internacionales pequeños, pensados para proyectos Erasmus+. Dentro de la plataforma, cada curso tiene su temario completo día a día, recursos para probar ya y un espacio para conocer a los docentes que van.")}</p></div>
 <div class="fchips" data-group="crs">{cchips}</div><div class="g3" data-grid="crs">{ccards}</div>
 <p class="center more-l"><a class="link" href="{EMOVE}/courses" target="_blank" rel="noopener">{t("All courses on emoveacademy.com", "Todos los cursos en emoveacademy.com")} {ic("external")}</a></p></section>"""
+
+    # ---------- community ----------
+    comm = [
+        ("chat", t("Discussion spaces", "Espacios de debate"), t("Staff room, Erasmus+ help desk, classroom ideas and a space for every eMove course.", "Sala de profesores, ayuda Erasmus+, ideas de aula y un espacio para cada curso de eMove.")),
+        ("people", t("Teacher directory", "Directorio de docentes"), t("Find colleagues by country, subject or what they are looking for. You decide whether you appear.", "Encuentra colegas por país, materia o lo que buscan. Tú decides si apareces.")),
+        ("globe", t("Find a partner", "Encuentra socio"), t("Schools for eTwinning, KA2 projects or job shadowing, and colleagues going to the same course.", "Centros para eTwinning, proyectos KA2 o job shadowing, y colegas que van al mismo curso.")),
+    ]
+    comm_sec = f"""<section class="wrap" id="community"><div class="sec-h reveal"><span class="eyebrow">{ic("people")} {t("Community", "Comunidad")}</span><h2>{t("Learn with teachers from all over Europe", "Aprende con docentes de toda Europa")}</h2>
+<p class="lead">{t("Inside the platform you are never on your own: ask, share and find partners for your next project.", "Dentro de la plataforma nunca estás solo: pregunta, comparte y encuentra socios para tu próximo proyecto.")}</p></div>
+<div class="g3">{"".join(f'<div class="feat reveal">{ic(i)}<b>{E(a)}</b><p>{E(b)}</p></div>' for i, a, b in comm)}</div></section>"""
 
     # ---------- guides as tabs ----------
     gtabs = "".join(f'<button type="button" role="tab" class="gtab{" on" if n == 0 else ""}" data-g="{n}" aria-selected="{"true" if n == 0 else "false"}">{E(GUIDES_ES[g["slug"]]["tab"] if es else TAB_EN[g["slug"]])}</button>' for n, g in enumerate(GUIDES))
@@ -288,7 +310,7 @@ def landing(d, L):
 <div><b>eMove Academy</b><a href="{EMOVE}/courses" target="_blank" rel="noopener">{t("Courses", "Cursos")}</a><a href="{EMOVE}/erasmus-plus" target="_blank" rel="noopener">Erasmus+</a><a href="{EMOVE}/for-schools" target="_blank" rel="noopener">{t("For schools", "Para centros")}</a><a href="mailto:{MAIL}">{MAIL}</a></div>
 <div><b>Legal</b><a href="#privacy" data-open="privacy">{t("Privacy notice", "Aviso de privacidad")}</a></div></div></footer>"""
 
-    return header + "<main>" + hero + erasmus + money_sec + timeline + course_sec + res_sec + courses_sec + guides_sec + how + faq + "</main>" + footer
+    return header + "<main>" + hero + erasmus + money_sec + timeline + course_sec + res_sec + courses_sec + comm_sec + guides_sec + how + faq + "</main>" + footer
 
 
 def route_finder(t):
@@ -314,15 +336,15 @@ def privacy(t):
     if t("en", "es") == "es":
         return f"""<div class="priv"><p class="muted">Última actualización: octubre de 2026</p>
 <h4>Responsable</h4><p>EMOVE Profe lo gestiona eMove Academy (Barcelona, España). Contacto: <a href="mailto:{MAIL}">{MAIL}</a>.</p>
-<h4>Qué datos recogemos</h4><ul><li>Los datos que das al solicitar acceso: nombre, email, centro, país, rol, etapa, materia e intereses.</li><li>Tu contraseña, guardada solo de forma cifrada.</li><li>Tu progreso en la plataforma: actividades completadas, notas, recursos guardados, resultados del test, certificados y los cursos de eMove que abres.</li></ul>
-<h4>Para qué los usamos</h4><ul><li>Para revisar tu solicitud y gestionar tu acceso.</li><li>Para sincronizar tu progreso entre dispositivos.</li><li>Para entender cómo se usa la plataforma y mejorarla.</li><li>Solo si marcas la casilla: para enviarte novedades sobre plazos Erasmus+ y cursos de eMove. Puedes cambiarlo en tu perfil cuando quieras.</li></ul>
+<h4>Qué datos recogemos</h4><ul><li>Los datos que das al solicitar acceso: nombre, email, centro, país, rol, etapa, materia e intereses.</li><li>Tu contraseña, guardada solo de forma cifrada.</li><li>Tu progreso en la plataforma: actividades completadas, notas, recursos guardados, resultados del test, certificados y los cursos de eMove que abres.</li><li>Lo que publicas en los espacios de debate y, solo si lo activas, tu ficha del directorio de docentes.</li></ul>
+<h4>Para qué los usamos</h4><ul><li>Para revisar tu solicitud y gestionar tu acceso.</li><li>Para sincronizar tu progreso entre dispositivos.</li><li>Para mostrar tus mensajes y, si lo eliges, tu ficha del directorio a otros docentes aprobados. Tu email solo se muestra si lo activas.</li><li>Para entender cómo se usa la plataforma y mejorarla.</li><li>Solo si marcas la casilla: para enviarte novedades sobre plazos Erasmus+ y cursos de eMove. Puedes cambiarlo en tu perfil cuando quieras.</li></ul>
 <h4>Dónde se guardan</h4><p>Tu cuenta se guarda en nuestro proveedor de alojamiento (Netlify). Tu navegador guarda también una copia local de tu progreso para que la plataforma funcione sin conexión. No usamos cookies de publicidad ni de seguimiento; esta web solo guarda en tu navegador el idioma que eliges.</p>
 <h4>Cuánto tiempo</h4><p>Mientras tu cuenta esté activa. Pídenos borrar tu cuenta cuando quieras y eliminaremos tus datos y tu progreso.</p>
 <h4>Tus derechos</h4><p>Puedes pedir acceder, corregir o borrar tus datos, u oponerte a su uso, escribiendo a <a href="mailto:{MAIL}">{MAIL}</a>. También puedes reclamar ante la autoridad de protección de datos.</p></div>"""
     return f"""<div class="priv"><p class="muted">Last updated: October 2026</p>
 <h4>Who is responsible</h4><p>EMOVE Profe is run by eMove Academy (Barcelona, Spain). Contact: <a href="mailto:{MAIL}">{MAIL}</a>.</p>
-<h4>What we collect</h4><ul><li>The details you give when you request access: name, email, school, country, role, stage, subject and interests.</li><li>Your password, stored only in encrypted form.</li><li>Your progress on the platform: completed activities, notes, saved resources, quiz results, certificates and the eMove courses you open.</li></ul>
-<h4>Why we use it</h4><ul><li>To review your request and manage your access.</li><li>To keep your progress in sync across your devices.</li><li>To understand how the platform is used and improve it.</li><li>Only if you tick the box: to send you news about Erasmus+ deadlines and eMove courses. You can change this in your profile at any time.</li></ul>
+<h4>What we collect</h4><ul><li>The details you give when you request access: name, email, school, country, role, stage, subject and interests.</li><li>Your password, stored only in encrypted form.</li><li>Your progress on the platform: completed activities, notes, saved resources, quiz results, certificates and the eMove courses you open.</li><li>What you post in the discussion spaces and, only if you switch it on, your card in the teacher directory.</li></ul>
+<h4>Why we use it</h4><ul><li>To review your request and manage your access.</li><li>To keep your progress in sync across your devices.</li><li>To show your posts and, if you choose, your directory card to other approved teachers. Your email is only shown if you switch it on.</li><li>To understand how the platform is used and improve it.</li><li>Only if you tick the box: to send you news about Erasmus+ deadlines and eMove courses. You can change this in your profile at any time.</li></ul>
 <h4>Where it is stored</h4><p>Your account is stored with our hosting provider (Netlify). Your browser also keeps a local copy of your progress so the platform works offline. We do not use advertising or tracking cookies; this website only remembers the language you choose in your browser.</p>
 <h4>How long we keep it</h4><p>While your account is active. Ask us to delete your account at any time and we will erase your details and progress.</p>
 <h4>Your rights</h4><p>You can ask to access, correct or delete your data, or object to its use, by writing to <a href="mailto:{MAIL}">{MAIL}</a>. You can also complain to your data protection authority.</p></div>"""

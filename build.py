@@ -9,7 +9,7 @@ root = pathlib.Path(__file__).parent
 src = root / "src"
 dist = root / "dist"
 app = dist / "app"
-FILES = ["data-emove.js", "data-course.js", "data-resources.js", "core.js", "accounts.js", "academy.js", "pages.js"]
+FILES = ["data-emove.js", "data-course.js", "data-resources.js", "data-syllabus.js", "core.js", "accounts.js", "academy.js", "pages.js", "learn.js", "community.js"]
 
 if dist.exists():
     shutil.rmtree(dist)
@@ -49,7 +49,7 @@ manifest = {
         {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
         {"src": "icons/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
     ],
-    "shortcuts": [{"name": "Academy", "url": "./#academy"}, {"name": "Resources", "url": "./#resources"}],
+    "shortcuts": [{"name": "Learn", "url": "./#learn"}, {"name": "Resources", "url": "./#resources"}, {"name": "Community", "url": "./#community"}],
 }
 (app / "manifest.webmanifest").write_text(json.dumps(manifest, indent=2))
 version = hashlib.sha1((app / "index.html").read_bytes()).hexdigest()[:10]
